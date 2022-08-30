@@ -154,6 +154,8 @@ Although the user stories do not say anything about deployment, you should consi
 
 ### US-01 Create and list reservations
 
+
+
 As a restaurant manager<br/>
 I want to create a new reservation when a customer calls<br/>
 so that I know how many customers will arrive at the restaurant on a given day.
