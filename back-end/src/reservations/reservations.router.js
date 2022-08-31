@@ -9,7 +9,6 @@ const controller = require("./reservations.controller");
 const methodNotAllowed = require("../errors/methodNotAllowed");
 
 // root = /reservations/
-router.route("/").all(methodNotAllowed);
-router.route("/new").post(controller.create).all(methodNotAllowed);
+router.route("/").get(controller.list).post(controller.create).all(methodNotAllowed);
 
 module.exports = router;

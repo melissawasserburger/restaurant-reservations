@@ -27,7 +27,7 @@ function ReservationForm() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${REACT_APP_API_BASE_URL}/reservations/new`, {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/reservations`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
