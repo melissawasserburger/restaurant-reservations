@@ -40,7 +40,7 @@ function hasRequiredFields(req, res, next) {
 }
 
 function hasOnlyValidProperties(req, res, next) {
-  const { data = {} } = req.body;
+  const data = req.body;
 
   const invalidFields = Object.keys(data).filter((field) => {
     console.log(field);
@@ -65,8 +65,6 @@ function hasOnlyValidProperties(req, res, next) {
 
 */
 async function create(req, res, next) {
-  console.log("at create!");
-  console.log(req.body)
   const data = await service.create(req.body);
   res.status(201).json({ data });
 }
