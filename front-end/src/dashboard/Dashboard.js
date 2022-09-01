@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import { listReservations } from "../utils/api";
 import ErrorAlert from "../layout/ErrorAlert";
 import ReservationList from "./ReservationsList";
@@ -10,10 +11,13 @@ import { formatAsTime, previous, next, today as todayFn } from "../utils/date-ti
  *  the date for which the user wants to view reservations.
  * @returns {JSX.Element}
  */
-function Dashboard({ today }) {
+function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
-  const [date, setDate] = useState(today);
+
+  const urlQuery = useLocation().search;
+  const dateQueryStart = (urlQuery.search("date") + 5);
+  date = urlQuery.slice(dateQueryStart, dateQueryStart + 10) || date;
 
   useEffect(loadDashboard, [date]);
 
@@ -34,6 +38,13 @@ function Dashboard({ today }) {
     />
   ));
 
+  const previousHandler = ({date}) => {
+    console.log(date)
+    console.log(previous(date))
+    date = previous(date)
+    console.log(date)
+  }
+
   return (
     <main>
       <div className="row d-flex flex-column">
@@ -48,13 +59,13 @@ function Dashboard({ today }) {
         </div>
       </div>
       <div className="row justify-content-around my-3">
-        <button type="button" name="previous-btn" className="ml-auto" onClick={()=> setDate(previous(date))}>
+        <button type="button" name="previous-btn" className="ml-auto" onClick={previousHandler}>
           Previous
         </button>
-        <button type="button" name="next-btn" className="mx-3" onClick={()=> setDate(next(date))}>
+        <button type="button" name="next-btn" className="mx-3" onClick={()=> date = (next(date))}>
           Next
         </button>
-        <button type="button" name="today" className="mr-auto" onClick={()=> setDate(todayFn())}>
+        <button type="button" name="today" className="mr-auto" onClick={()=> date = (todayFn())}>
           Today
         </button>
       </div>
