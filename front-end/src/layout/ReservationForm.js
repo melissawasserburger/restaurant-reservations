@@ -99,7 +99,8 @@ function ReservationForm() {
           type="date"
           id="reservation_date"
           name="reservation_date"
-          placeholder={new Date()}
+          placeholder="YYYY-MM-DD"
+          pattern="\d{4}-\d{2}-\d{2}"
           value={formState.reservation_date}
           onChange={changeHandler}
         ></input>
@@ -109,7 +110,8 @@ function ReservationForm() {
           type="time"
           id="reservation_time"
           name="reservation_time"
-          placeholder="HH:MM:SS"
+          placeholder="HH:MM"
+          pattern="[0-9]{2}:[0-9]{2}"
           value={formState.reservation_time}
           onChange={changeHandler}
         ></input>

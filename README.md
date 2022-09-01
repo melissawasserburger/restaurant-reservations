@@ -170,7 +170,7 @@ so that I know how many customers will arrive at the restaurant on a given day.
      - Number of people in the party, which must be at least 1 person. `<input name="people" />`
    - display a `Submit` button that, when clicked, saves the new reservation, then displays the `/dashboard` page for the date of the new reservation
    - display a `Cancel` button that, when clicked, returns the user to the previous page -->
-   - display any error messages returned from the API
+   - display any error messages returned from the API (almost done, needs to display multiple)
 1. The `/dashboard` page will
    <!-- - list all reservations for one date only. (E.g. if the URL is `/dashboard?date=2035-12-30` then send a GET to `/reservations?date=2035-12-30` to list the reservations for that date). The date is defaulted to today, and the reservations are sorted by time. -->
    <!-- - display next, previous, and today buttons that allow the user to see reservations on other dates -->
@@ -186,8 +186,8 @@ so that I know how many customers will arrive at the restaurant on a given day.
 >
 > `<input type="time" />` will store the time in `HH:MM:SS` format. This is a format that works well with the PostgreSQL `time` data type. -->
 >
-> **Optional** If you want to add support to other browsers such as Safari or IE, you can use the pattern and placeholder attributes along with the date and time inputs in your form. For the date input you can use `<input type="date" placeholder="YYYY-MM-DD" pattern="\d{4}-\d{2}-\d{2}"/>`, and for the time input you can use `<input type="time" placeholder="HH:MM" pattern="[0-9]{2}:[0-9]{2}"/>`. You can read more about handling browser support [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date#handling_browser_support).
->
+<!-- > **Optional** If you want to add support to other browsers such as Safari or IE, you can use the pattern and placeholder attributes along with the date and time inputs in your form. For the date input you can use `<input type="date" placeholder="YYYY-MM-DD" pattern="\d{4}-\d{2}-\d{2}"/>`, and for the time input you can use `<input type="time" placeholder="HH:MM" pattern="[0-9]{2}:[0-9]{2}"/>`. You can read more about handling browser support [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date#handling_browser_support).
+> -->
 <!-- > You can assume that all dates and times will be in your local time zone.
 
 > **Hint** In the backend code, be sure to wrap any async controller functions in an `asyncErrorBoundary` call to ensure errors in async code are property handled.

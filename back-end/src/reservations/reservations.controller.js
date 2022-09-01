@@ -7,7 +7,6 @@ const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 async function list(req, res) {
   const date = req.query.date;
-  console.log(date)
   const data = await service.list(date);
   res.json({ data: data });
 }

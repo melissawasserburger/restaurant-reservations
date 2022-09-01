@@ -1,5 +1,5 @@
 #background-container {
-    width: fill;
+    width: stretch;
     height: 7rem;
     background: #ffffff url("../photos/restaurant.jpg") no-repeat right top;
     background-size: cover;
