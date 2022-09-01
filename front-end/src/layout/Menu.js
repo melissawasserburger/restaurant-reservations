@@ -1,7 +1,7 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 
+import "./Menu.css"
 /**
  * Defines the menu for this application.
  *
@@ -10,38 +10,34 @@ import { Link } from "react-router-dom";
 
 function Menu() {
   return (
-    <nav className="navbar navbar-dark align-items-start p-0">
-      <div className="container-fluid d-flex flex-column p-0">
-        <Link
-          className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-          to="/"
-        >
-          <div className="sidebar-brand-text mx-3">
-            <span>Periodic Tables</span>
+        <div id="background-container" className="row d-flex justify-content-between side-bar">
+        <Link to="/">
+          <div className="col d-flex flex-wrap">
+            <span id="logo">Periodic Tables</span>
           </div>
         </Link>
-        <hr className="sidebar-divider my-0" />
-        <ul className="nav navbar-nav text-light" id="accordionSidebar">
+        <nav id="nav" className="row align-items-center">
+        <ul className="col d-flex flex-wrap nav" id="accordionSidebar">
           <li className="nav-item">
-            <Link className="nav-link" to="/dashboard">
+            <Link className="text-light nav-link" to="/dashboard">
               <span className="oi oi-dashboard" />
               &nbsp;Dashboard
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/search">
+            <Link className="text-light nav-link" to="/search">
               <span className="oi oi-magnifying-glass" />
               &nbsp;Search
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/reservations/new">
+            <Link className="text-light nav-link" to="/reservations/new">
               <span className="oi oi-plus" />
               &nbsp;New Reservation
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/tables/new">
+            <Link className="text-light nav-link" to="/tables/new">
               <span className="oi oi-layers" />
               &nbsp;New Table
             </Link>
@@ -54,8 +50,8 @@ function Menu() {
             type="button"
           />
         </div>
-      </div>
     </nav>
+    </div>
   );
 }
 

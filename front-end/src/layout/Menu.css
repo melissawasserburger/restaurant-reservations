@@ -1,0 +1,26 @@
+#background-container {
+    width: fill;
+    height: 7rem;
+    background: #ffffff url("../photos/restaurant.jpg") no-repeat right top;
+    background-size: cover;
+    align-items: center;
+    border-bottom: black solid 2px;
+}
+
+#logo {
+    color: white;
+    background-color: rgba(48, 48, 48, 0.500); 
+    font-family: 'Satisfy', cursive;
+    font-size: 45px;
+    width: fit-content;
+    margin-left: 10px;
+    padding: 1rem 2.5rem;
+    z-index: 1;
+}
+
+#nav {
+    background-color: rgba(48, 48, 48, 0.500); 
+    height:6.5rem;
+    z-index: 2;
+}
+
