@@ -26,7 +26,7 @@ function Routes() {
         <ReservationForm />
       </Route>
       <Route path="/dashboard">
-        <Dashboard date={today()} />
+        <Dashboard today={today()} />
       </Route>
       <Route>
         <NotFound />

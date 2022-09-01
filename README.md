@@ -176,19 +176,19 @@ so that I know how many customers will arrive at the restaurant on a given day.
    - display next, previous, and today buttons that allow the user to see reservations on other dates
    - display any error messages returned from the API
 1. The `/reservations` API will have the same validations as above and will return 400, along with an informative error message, when a validation error happens.
-   - seed the reservations table with the data contained in `./back-end/src/db/seeds/00-reservations.json`
+   <!-- - seed the reservations table with the data contained in `./back-end/src/db/seeds/00-reservations.json` -->
 
-> **Hint** Dates and times in JavaScript and databases can be challenging.
+<!-- > **Hint** Dates and times in JavaScript and databases can be challenging.
 >
 > The users have confirmed that they will be using Chrome to access the site. This means you can use `<input type="date" />` and `<input type="time" />`, which are supported by Chrome but may not work in other browsers.
 >
 > `<input type="date" />` will store the date in `YYYY-MM-DD` format. This is a format that works well with the PostgreSQL `date` data type.
 >
-> `<input type="time" />` will store the time in `HH:MM:SS` format. This is a format that works well with the PostgreSQL `time` data type.
+> `<input type="time" />` will store the time in `HH:MM:SS` format. This is a format that works well with the PostgreSQL `time` data type. -->
 >
 > **Optional** If you want to add support to other browsers such as Safari or IE, you can use the pattern and placeholder attributes along with the date and time inputs in your form. For the date input you can use `<input type="date" placeholder="YYYY-MM-DD" pattern="\d{4}-\d{2}-\d{2}"/>`, and for the time input you can use `<input type="time" placeholder="HH:MM" pattern="[0-9]{2}:[0-9]{2}"/>`. You can read more about handling browser support [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date#handling_browser_support).
 >
-> You can assume that all dates and times will be in your local time zone.
+<!-- > You can assume that all dates and times will be in your local time zone.
 
 > **Hint** In the backend code, be sure to wrap any async controller functions in an `asyncErrorBoundary` call to ensure errors in async code are property handled.
 
@@ -218,7 +218,7 @@ Use in controllers as part of `module.exports`. For example:
 module.exports = {
 	create: asyncErrorBoundary(create)
 }
-```
+``` -->
 
 ### US-02 Create reservation on a future, working date
 

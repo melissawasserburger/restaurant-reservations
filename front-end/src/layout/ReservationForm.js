@@ -38,6 +38,7 @@ function ReservationForm() {
     // for now, the response from the backend is simply console logged
     console.log(resData);
     setFormState({ ...initialFormState });
+    history.goBack();
   };
 
   return (
@@ -74,18 +75,20 @@ function ReservationForm() {
         <label htmlFor="reservation_date">Reservation Date</label>
         <input
           required
-          type="text"
+          type="date"
           id="reservation_date"
           name="reservation_date"
+          placeholder={new Date()}
           value={formState.reservation_date}
           onChange={changeHandler}
         ></input>
         <label htmlFor="reservation_time">Reservation Start Time</label>
         <input
           required
-          type="text"
+          type="time"
           id="reservation_time"
           name="reservation_time"
+          placeholder="HH:MM:SS"
           value={formState.reservation_time}
           onChange={changeHandler}
         ></input>
