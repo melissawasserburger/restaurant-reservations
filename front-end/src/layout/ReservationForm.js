@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import ErrorAlert from "./ErrorAlert";
+
 const { REACT_APP_API_BASE_URL } = process.env;
 
 function ReservationForm() {
@@ -15,6 +17,14 @@ function ReservationForm() {
   };
 
   const [formState, setFormState] = useState(initialFormState);
+  const [error, setError] = useState(undefined);
+  const [errorMessage, setErrorMessage] = useState(undefined);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    setErrorMessage(error)
+    return () => abortController.abort()
+  }, [error])
 
   const changeHandler = ({ target }) => {
     setFormState({ ...formState, [target.name]: target.value });
@@ -37,11 +47,19 @@ function ReservationForm() {
     const resData = await response.json();
     // for now, the response from the backend is simply console logged
     console.log(resData);
-    setFormState({ ...initialFormState });
-    history.goBack();
+    if (resData.error) {
+      setError(resData.error);
+    }
+    console.log(resData.error);
+    if (response.status !== 400) {
+      setFormState({ ...initialFormState });
+      history.goBack();
+    }
   };
 
   return (
+    <div>
+    {error ? <ErrorAlert errorMessage={errorMessage}/> : <></>}
     <div className="form-group">
       <form onSubmit={submitHandler}>
         <label htmlFor="first_name">First Name</label>
@@ -119,6 +137,7 @@ function ReservationForm() {
           Submit
         </button>
       </form>
+    </div>
     </div>
   );
 }

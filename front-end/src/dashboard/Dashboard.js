@@ -30,7 +30,6 @@ function Dashboard({ today }) {
     <ReservationList
       key={index}
       reservation={reservation}
-      date={date}
       formatTime={formatAsTime}
     />
   ));

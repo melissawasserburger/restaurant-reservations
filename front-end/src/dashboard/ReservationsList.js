@@ -1,8 +1,9 @@
 import React from "react";
 
-function ReservationList({ reservation, date, formatTime }) {
+function ReservationList({ reservation, formatTime }) {
   const { first_name, last_name, mobile_number, reservation_time, reservation_date, people } =
     reservation;
+
   let formattedTime = formatTime(reservation_time);
   let formattedHours = Number(formattedTime.slice(0,2)) > 12 ? Number(formattedTime.slice(0,2) % 12) : Number(formattedTime.slice(0,2));
   formattedTime = `${formattedHours}${formattedTime.slice(2)}`;
