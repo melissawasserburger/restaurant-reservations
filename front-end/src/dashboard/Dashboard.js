@@ -58,7 +58,7 @@ function Dashboard({ today }) {
           Today
         </button>
       </div>
-      <ErrorAlert error={reservationsError} />
+      {reservationsError ? <ErrorAlert error={reservationsError}/> : <></>}
       <hr />
       <div className="row">{reservationslist}</div>
     </main>

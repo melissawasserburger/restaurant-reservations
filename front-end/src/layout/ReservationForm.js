@@ -57,6 +57,10 @@ function ReservationForm() {
     }
   };
 
+
+  // currently, ErrorAlert will only display one error message at a time
+  // with "Reservations must be place in the future" taking priority
+  // needs to be set up so there multiple form valiations will result in multiple messages
   return (
     <div>
     {error ? <ErrorAlert errorMessage={errorMessage}/> : <></>}

@@ -228,10 +228,10 @@ so that users do not accidentally create a reservation for days when we are clos
 
 #### Acceptance criteria
 
-1. The `/reservations/new` page will display an error message with `className="alert alert-danger"` if any of the following constraints are violated:
-   - The reservation date is a Tuesday as the restaurant is closed on Tuesdays.
-   - The reservation date is in the past. Only future reservations are allowed.
-1. The `/reservations` API will have the same validations as above and will return 400, along with an informative error message, when a validation error happens.
+<!-- 1. The `/reservations/new` page will display an error message with `className="alert alert-danger"` if any of the following constraints are violated: -->
+   <!-- - The reservation date is a Tuesday as the restaurant is closed on Tuesdays. -->
+   <!-- - The reservation date is in the past. Only future reservations are allowed. -->
+<!-- 1. The `/reservations` API will have the same validations as above and will return 400, along with an informative error message, when a validation error happens. -->
 
 > **Hint** There may be more than one validation error on the page at time.
 >

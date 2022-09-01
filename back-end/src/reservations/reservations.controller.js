@@ -60,6 +60,19 @@ function hasOnlyValidProperties(req, res, next) {
   next();
 }
 
+function reservationIsInFuture(req, res, next) {
+  const { reservation_date, reservation_time } = req.body;
+  const todaysDate = new Date();
+  const submittedDate = new Date(`${reservation_time} ${reservation_date}`);
+  if (submittedDate < todaysDate) {
+    return next({
+      status: 400,
+      message: `Reservations must be placed in the future.`
+    })
+  }
+  next();
+}
+
 // getDay returns a num 0-6 where 0 is Monday, 6 is Sunday
 //validation check for 1 --> Tuesday
 function isTuesday(req, res, next) {
@@ -78,6 +91,7 @@ function isTuesday(req, res, next) {
     - req has all required fields
     - req has all valid entries of fields
     - reservation DOES NOT take place on Tuesday
+    - reservation is NOT in the past
 */
 async function create(req, res, next) {
   const data = await service.create(req.body);
@@ -89,6 +103,7 @@ module.exports = {
   create: [
     hasRequiredFields,
     hasOnlyValidProperties,
+    reservationIsInFuture,
     isTuesday,
     asyncErrorBoundary(create),
   ],

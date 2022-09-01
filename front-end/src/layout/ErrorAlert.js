@@ -12,7 +12,7 @@ function ErrorAlert({ errorMessage }) {
 
   return (
     <div className="alert alert-danger m-2">
-    {errorMessage ? `Error: ${errorMessage}` : null} 
+    {errorMessage ? `${errorMessage}` : null} 
     </div>)
 }
 
