@@ -98,7 +98,7 @@ async function create(req, res, next) {
 }
 
 module.exports = {
-  list,
+  list: [asyncErrorBoundary(list)],
   create: [
     hasRequiredFields,
     hasOnlyValidProperties,
