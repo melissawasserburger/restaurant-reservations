@@ -102,7 +102,7 @@ describe("US-01 - Create and list reservations", () => {
 
       const response = await request(app)
         .post("/reservations")
-        .set("Accept", "application/json")
+        .set("Accept", "application/json")  
         .send({ data });
 
       expect(response.body.error).toContain("last_name");
