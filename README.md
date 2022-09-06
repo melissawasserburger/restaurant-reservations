@@ -277,7 +277,7 @@ so that I know which tables are occupied and free.
    - display a `Cancel` button that, when clicked, returns the user to the previous page -->
 1. The `/dashboard` page will:
 
-   - display a list of all reservations in one area.
+   - display a list of all reservations in one area. ?? what does "one area" mean
    <!-- - each reservation in the list will: -->
      <!-- - Display a "Seat" button on each reservation.
      - The "Seat" button must be a link with an `href` attribute that equals `/reservations/${reservation_id}/seat`, so it can be found by the tests. -->
@@ -286,8 +286,8 @@ so that I know which tables are occupied and free.
      <!-- - The "Free" or "Occupied" text must have a `data-table-id-status=${table.table_id}` attribute, so it can be found by the tests. -->
 
 1. The `/reservations/:reservation_id/seat` page will
-   - have the following required and not-nullable fields:
-     - Table number: `<select name="table_id" />`. The text of each option must be `{table.table_name} - {table.capacity}` so the tests can find the options.
+   <!-- - have the following required and not-nullable fields:
+     - Table number: `<select name="table_id" />`. The text of each option must be `{table.table_name} - {table.capacity}` so the tests can find the options. -->
    - do not seat a reservation with more people than the capacity of the table
    - display a `Submit` button that, when clicked, assigns the table to the reservation then displays the `/dashboard` page
    - PUT to `/tables/:table_id/seat/` in order to save the table assignment. The body of the request must be `{ data: { reservation_id: x } }` where X is the reservation_id of the reservation being seated. The tests do not check the body returned by this request.

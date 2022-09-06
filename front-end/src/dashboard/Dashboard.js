@@ -18,6 +18,8 @@ function Dashboard({ date }) {
   const dateQueryStart = (urlQuery.search("date") + 5);
   date = urlQuery.slice(dateQueryStart, dateQueryStart + 10) || date;
 
+  console.log(useLocation.pathname)
+
   useEffect(loadDashboard, [date]);
 
   function loadDashboard() {
@@ -66,6 +68,7 @@ function Dashboard({ date }) {
   }
 
   return (
+
     <main>
       <div className="row d-flex flex-column">
         <h1
