@@ -25,6 +25,7 @@ const VALID_PROPERTIES = [
 function hasRequiredFields(req, res, next) {
   const { data = {} } = req.body;
   const map = new Map();
+
   for (let property in data) {
     map.set(property);
   }
@@ -44,15 +45,13 @@ function hasRequiredFields(req, res, next) {
 // this validation checks for no empty strings in name, valid format for phone number, and people >= 1
 function hasValidFieldInputs(req, res, next) {
   let { first_name, last_name, mobile_number, people } = req.body.data;
-  console.log(people);
-  people = Number(people);
-  if (people <= 0) {
-    if (typeof people !== "number") {
-      return next({
-        status: 400,
-        message: `Number of guests must be at least one. You entered: ${people} people.`,
-      });
-    }
+
+
+  if (people <= 0 || typeof people !== "number") {
+    return next({
+      status: 400,
+      message: `Number of guests must be at least one. You entered: ${people} people.`,
+    });
   }
 
   first_name = first_name.replace(" ", "");
@@ -84,7 +83,7 @@ function hasValidFieldInputs(req, res, next) {
 // though less of an issue in this context, moment is a legecy project and generally not recommended because of its size
 function validDateAndTime(req, res, next) {
   const { reservation_date, reservation_time } = req.body.data;
-  console.log(reservation_date);
+
   if (!moment(reservation_date, "YYYY-MM-DD").isValid()) {
     return next({
       status: 400,
@@ -106,7 +105,7 @@ function validDateAndTime(req, res, next) {
 // this validation checks if reservation_date, reservation_time is entered, formatted, and in future
 function reservationIsInFuture(req, res, next) {
   let { reservation_date, reservation_time } = req.body.data;
-  console.log(reservation_date);
+
   reservation_date = reservation_date.replace(" ", "");
   reservation_time = reservation_time.replace(" ", "");
   if (reservation_date === "" || reservation_time === "") {
@@ -131,7 +130,7 @@ function reservationIsInFuture(req, res, next) {
 // business hours: 10:30 AM - 9:30 PM, everyday except Tuesday
 function isDuringBusinessHours(req, res, next) {
   let { reservation_date, reservation_time } = req.body.data;
-  console.log(reservation_date);
+
   // getDay returns a num 0-6 where 0 is Monday, 6 is Sunday
   //validation check for 1 --> Tuesday
   const dayNum = new Date(reservation_date).getDay();
