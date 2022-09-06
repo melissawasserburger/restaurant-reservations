@@ -43,12 +43,13 @@ function ReservationForm() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    formState.people = Number(formState.people);
     const response = await fetch(`${REACT_APP_API_BASE_URL}/reservations`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(formState),
+      body: JSON.stringify({data: formState}),
     });
     const resData = await response.json();
 
