@@ -1,18 +1,18 @@
 # Capstone: Restaurant Reservation System
-
+<!-- 
 > You have been hired as a full stack developer at _Periodic Tables_, a startup that is creating a reservation system for fine dining restaurants.
 > The software is used only by restaurant personnel when a customer calls to request a reservation.
-> At this point, the customers will not access the system online.
+> At this point, the customers will not access the system online. -->
 
-There are no user stories for deployment: it is expected that you will deploy the application to production after you finish a user story.
+<!-- There are no user stories for deployment: it is expected that you will deploy the application to production after you finish a user story.
 
-There are no user stories for logging: it is expected that you will add logging to the application with enough detail to help you diagnose issues in production.
+There are no user stories for logging: it is expected that you will add logging to the application with enough detail to help you diagnose issues in production. -->
 
 ## Existing files
 
-This repository is set up as a *monorepo*, meaning that the frontend and backend projects are in one repository. This allows you to open both projects in the same editor.
+<!-- This repository is set up as a *monorepo*, meaning that the frontend and backend projects are in one repository. This allows you to open both projects in the same editor.
 
-As you work through the user stories listed later in this document, you will be writing code that allows your frontend and backend applications to talk to each other. You will also write code to allow your controllers and services to connect to, and query, your PostgreSQL database via [Knex](http://knexjs.org/).
+As you work through the user stories listed later in this document, you will be writing code that allows your frontend and backend applications to talk to each other. You will also write code to allow your controllers and services to connect to, and query, your PostgreSQL database via [Knex](http://knexjs.org/). -->
 
 The table below describes the folders in this starter repository:
 
@@ -22,8 +22,8 @@ The table below describes the folders in this starter repository:
 | `./front-end`    | The frontend project, which runs on `localhost:3000` by default. |
 
 This starter code closely follows the best practices and patterns established in the Robust Server Structure module.
-
-**Note**: Please do not submit a pull request to this repository with your solution.
+<!-- 
+**Note**: Please do not submit a pull request to this repository with your solution. -->
 
 ### Backend Existing files
 
@@ -71,7 +71,7 @@ The table below describes the existing files in the `./front-end` folder:
 | `./front-end/src/utils/format-reservation-date.js` | Defines a function to format the date on a single reservation or an array of reservations.             |
 | `./front-end/src/utils/format-reservation-time.js` | Defines a function to format the time on a single reservation or an array of reservations.             |
 | `./front-end/src/utils/useQuery.js`                | Defines a custom hook to parse the query parameters from the URL.                                      |
-
+<!-- 
 ## Database setup
 
 1. Set up four new ElephantSQL database instances - development, test, preview, and production - by following the instructions in the "PostgreSQL: Creating & Deleting Databases" checkpoint.
@@ -130,35 +130,35 @@ Note that the logging level for the backend is set to `warn` when running tests 
 
 > **Note**: If you are getting a `unable to resolve dependency tree` error when running the frontend tests, run the following command: `npm install --force --prefix front-end`. This will allow you to run the frontend tests.
 
-> **Hint**: If you stop the tests before they finish, it can leave the test database in an unusual state causing the tests to fail unexpectedly the next time you run them. If this happens, delete all tables in the test database, including the `knex_*` tables, and try the tests again.
-
+> **Hint**: If you stop the tests before they finish, it can leave the test database in an unusual state causing the tests to fail unexpectedly the next time you run them. If this happens, delete all tables in the test database, including the `knex_*` tables, and try the tests again. -->
+<!-- 
 ### Frontend test timeout failure
 
 Running the frontend tests on a resource constrained computer may result in timeout failures.
 
-If you believe your implementation is correct, but needs a bit more time to finish, you can update the `testTimeout` value in `front-end/e2e/jest.config.js`. A value of 10000 or even 12000 will give each test a few more seconds to complete.
+If you believe your implementation is correct, but needs a bit more time to finish, you can update the `testTimeout` value in `front-end/e2e/jest.config.js`. A value of 10000 or even 12000 will give each test a few more seconds to complete. -->
 
-#### Screenshots
+<!-- #### Screenshots
 
 To help you better understand what might be happening during the end-to-end tests, screenshots are taken at various points in the test.
 
 The screenshots are saved in `front-end/.screenshots` and you can review them after running the end-to-end tests.
 
-You can use the screenshots to debug your code by rendering additional information on the screen.
+You can use the screenshots to debug your code by rendering additional information on the screen. -->
 
 ## Product Backlog
 
 The Product Manager has already created the user stories for _Periodic Tables_. Each of the user stories is listed below, and your Product Manager wants them to be implemented in the order in which they are listed. Another developer has already written the tests for each of the user stories so that you don't have to.
 
-Although the user stories do not say anything about deployment, you should consider deploying early and often. You may even decide to deploy before adding any features. We recommend that you use [Heroku](https://devcenter.heroku.com/articles/deploying-nodejs) to deploy this project.
+<!-- Although the user stories do not say anything about deployment, you should consider deploying early and often. You may even decide to deploy before adding any features. We recommend that you use [Heroku](https://devcenter.heroku.com/articles/deploying-nodejs) to deploy this project. -->
 
 ### US-01 Create and list reservations
 
 As a restaurant manager<br/>
 I want to create a new reservation when a customer calls<br/>
 so that I know how many customers will arrive at the restaurant on a given day.
-
-#### Acceptance Criteria
+<!-- 
+#### Acceptance Criteria -->
 
 1. The `/reservations/new` page will
    <!-- - have the following required and not-nullable fields:
@@ -225,8 +225,8 @@ module.exports = {
 As a restaurant manager<br/>
 I only want to allow reservations to be created on a day when we are open<br/>
 so that users do not accidentally create a reservation for days when we are closed.<br/>
-
-#### Acceptance criteria
+<!-- 
+#### Acceptance criteria -->
 
 <!-- 1. The `/reservations/new` page will display an error message with `className="alert alert-danger"` if any of the following constraints are violated: -->
    <!-- - The reservation date is a Tuesday as the restaurant is closed on Tuesdays. -->
@@ -249,7 +249,7 @@ so that users do not accidentally create a reservation for days when we are clos
 As a restaurant manager<br/>
 I only want to allow reservations to be created during business hours, up to 60 minutes before closing<br/>
 so that users do not accidentally create a reservation for a time we cannot accommodate.
-
+<!-- 
 #### Acceptance criteria
 
 1. The `/reservations/new` page will display an error message with `className="alert alert-danger"`, if any of the following additional constraints are violated:
@@ -258,7 +258,7 @@ so that users do not accidentally create a reservation for a time we cannot acco
    - The reservation date and time combination is in the past. Only future reservations are allowed. E.g., if it is noon, only allow reservations starting _after_ noon today.
 1. The `/reservations` API will have the same validations as above and will return 400, along with an informative error message, when a validation error happens.
 
-> **Hint** Parsing a Date that includes the time in JavaScript can be tricky. Again, keep an eye out for which time zone is being used for your Dates.
+> **Hint** Parsing a Date that includes the time in JavaScript can be tricky. Again, keep an eye out for which time zone is being used for your Dates. -->
 
 ### US-04 Seat reservation
 
@@ -270,20 +270,20 @@ so that I know which tables are occupied and free.
 #### Acceptance Criteria
 
 1. The `/tables/new` page will
-   - have the following required and not-nullable fields:
+   <!-- - have the following required and not-nullable fields:
      - Table name: `<input name="table_name" />`, which must be at least 2 characters long.
-     - Capacity: `<input name="capacity" />`, this is the number of people that can be seated at the table, which must be at least 1 person.
-   - display a `Submit` button that, when clicked, saves the new table then displays the `/dashboard` page
-   - display a `Cancel` button that, when clicked, returns the user to the previous page
+     - Capacity: `<input name="capacity" />`, this is the number of people that can be seated at the table, which must be at least 1 person. -->
+   <!-- - display a `Submit` button that, when clicked, saves the new table then displays the `/dashboard` page
+   - display a `Cancel` button that, when clicked, returns the user to the previous page -->
 1. The `/dashboard` page will:
 
    - display a list of all reservations in one area.
-   - each reservation in the list will:
-     - Display a "Seat" button on each reservation.
-     - The "Seat" button must be a link with an `href` attribute that equals `/reservations/${reservation_id}/seat`, so it can be found by the tests.
-   - display a list of all tables, sorted by `table_name`, in another area of the dashboard
-     - Each table will display "Free" or "Occupied" depending on whether a reservation is seated at the table.
-     - The "Free" or "Occupied" text must have a `data-table-id-status=${table.table_id}` attribute, so it can be found by the tests.
+   <!-- - each reservation in the list will: -->
+     <!-- - Display a "Seat" button on each reservation.
+     - The "Seat" button must be a link with an `href` attribute that equals `/reservations/${reservation_id}/seat`, so it can be found by the tests. -->
+   <!-- - display a list of all tables, sorted by `table_name`, in another area of the dashboard -->
+     <!-- - Each table will display "Free" or "Occupied" depending on whether a reservation is seated at the table. -->
+     <!-- - The "Free" or "Occupied" text must have a `data-table-id-status=${table.table_id}` attribute, so it can be found by the tests. -->
 
 1. The `/reservations/:reservation_id/seat` page will
    - have the following required and not-nullable fields:
@@ -292,9 +292,9 @@ so that I know which tables are occupied and free.
    - display a `Submit` button that, when clicked, assigns the table to the reservation then displays the `/dashboard` page
    - PUT to `/tables/:table_id/seat/` in order to save the table assignment. The body of the request must be `{ data: { reservation_id: x } }` where X is the reservation_id of the reservation being seated. The tests do not check the body returned by this request.
    - display a `Cancel` button that, when clicked, returns the user to the previous page
-1. The `tables` table must be seeded with the following data:
-   - `Bar #1` & `Bar #2`, each with a capacity of 1.
-   - `#1` & `#2`, each with a capacity of 6.
+<!-- 1. The `tables` table must be seeded with the following data: -->
+   <!-- - `Bar #1` & `Bar #2`, each with a capacity of 1. -->
+   <!-- - `#1` & `#2`, each with a capacity of 6. -->
 1. The `/tables` API will have the same validations as above and will return 400, along with an informative error message, when a validation error happens.
 
 - if the table capacity is less than the number of people in the reservation, return 400 with an error message.
@@ -302,9 +302,9 @@ so that I know which tables are occupied and free.
 
 > **Hint** Work through the acceptance criteria in the order listed, step-by-step. A different order may be more challenging.
 
-> **Hint** Seed the `tables` table in a similar way as it's done with the `reservations` table.
+<!-- > **Hint** Seed the `tables` table in a similar way as it's done with the `reservations` table.
 
-> **Hint** Add a `reservation_id` column in the `tables` table. Use the `.references()` and `inTable()` knex functions to add the foreign key reference.
+> **Hint** Add a `reservation_id` column in the `tables` table. Use the `.references()` and `inTable()` knex functions to add the foreign key reference. -->
 
 ### US-05 Finish an occupied table
 
