@@ -20,9 +20,15 @@ function ReservationForm() {
   const [error, setError] = useState(undefined);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
+  const errors = [];
+  errors.map((error) => {
+    return <ErrorAlert errorMessage={error} />
+  })
+
   useEffect(() => {
     const abortController = new AbortController();
-    setErrorMessage(error)
+    setErrorMessage([error]);
+  
     return () => abortController.abort()
   }, [error])
 
@@ -45,20 +51,19 @@ function ReservationForm() {
       body: JSON.stringify(formState),
     });
     const resData = await response.json();
-    // successful requests are currently doing nothing with the resData
+
     if (resData.error) {
       setError(resData.error);
     }
   
     if (response.status !== 400) {
       setFormState({ ...initialFormState });
-      history.goBack();
+      history.push(`/dashboard/?date=${resData.data.reservation_date}`);
     }
   };
 
 
   // currently, ErrorAlert will only display one error message at a time
-  // with "Reservations must be place in the future" taking priority
   // needs to be set up so there multiple form valiations will result in multiple messages
   return (
     <div>
@@ -136,7 +141,6 @@ function ReservationForm() {
         <button
           type="submit"
           name="submit-btn"
-          onClick={submitHandler}
           className="btn btn-secondary"
         >
           Submit

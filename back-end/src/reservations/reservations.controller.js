@@ -23,8 +23,9 @@ const VALID_PROPERTIES = [
 ];
 
 function hasRequiredFields(req, res, next) {
+  const { data = {} } = req.body;
   const map = new Map();
-  for (let property in req.body.data) {
+  for (let property in data) {
     map.set(property);
   }
 
@@ -32,7 +33,7 @@ function hasRequiredFields(req, res, next) {
     if (!map.has(property)) {
       return next({
         status: 400,
-        message: `Must include a ${property} field.`
+        message: `Must include a ${property} field.`,
       });
     }
   }
@@ -43,12 +44,15 @@ function hasRequiredFields(req, res, next) {
 // this validation checks for no empty strings in name, valid format for phone number, and people >= 1
 function hasValidFieldInputs(req, res, next) {
   let { first_name, last_name, mobile_number, people } = req.body.data;
-
-  if (typeof people !== "number" || people <= 0) {
-    return next({
-      status: 400,
-      message: `Number of guests must be at least one. You entered: ${people} people.`
-    })
+  console.log(people);
+  people = Number(people);
+  if (people <= 0) {
+    if (typeof people !== "number") {
+      return next({
+        status: 400,
+        message: `Number of guests must be at least one. You entered: ${people} people.`,
+      });
+    }
   }
 
   first_name = first_name.replace(" ", "");
@@ -56,18 +60,20 @@ function hasValidFieldInputs(req, res, next) {
   if (first_name === "" || last_name === "") {
     return next({
       status: 400,
-      message: `Please provide a first_name and last_name.`
-    })
+      message: `Please provide a first_name and last_name.`,
+    });
   }
 
   // Valid number formats:
   // (123) 456-7890, (123)456-7890, 123-456-7890, 123.456.7890, 1234567890, +31636363634 or 075-63546725
-  const re = new RegExp(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im);
+  const re = new RegExp(
+    /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+  );
   if (!re.test(mobile_number)) {
     return next({
       status: 400,
-      message: `Please provide a valid mobile_number in the format xxx-xxx-xxxx`
-    })
+      message: `Please provide a valid mobile_number in the format xxx-xxx-xxxx`,
+    });
   }
 
   next();
@@ -78,19 +84,20 @@ function hasValidFieldInputs(req, res, next) {
 // though less of an issue in this context, moment is a legecy project and generally not recommended because of its size
 function validDateAndTime(req, res, next) {
   const { reservation_date, reservation_time } = req.body.data;
+  console.log(reservation_date);
   if (!moment(reservation_date, "YYYY-MM-DD").isValid()) {
     return next({
-      status:400,
-      message: `Please enter a valid reservation_date.`
-    })
+      status: 400,
+      message: `Please enter a valid reservation_date.`,
+    });
   }
 
   const re = new RegExp(/^([0-1]?[0-9]|2[0-4]):([0-5][0-9])(:[0-5][0-9])?$/);
   if (!re.test(reservation_time)) {
     return next({
       status: 400,
-      message: `Please enter a valid reservation_time.`
-    })
+      message: `Please enter a valid reservation_time.`,
+    });
   }
 
   next();
@@ -99,14 +106,14 @@ function validDateAndTime(req, res, next) {
 // this validation checks if reservation_date, reservation_time is entered, formatted, and in future
 function reservationIsInFuture(req, res, next) {
   let { reservation_date, reservation_time } = req.body.data;
-
+  console.log(reservation_date);
   reservation_date = reservation_date.replace(" ", "");
   reservation_time = reservation_time.replace(" ", "");
   if (reservation_date === "" || reservation_time === "") {
     return next({
       status: 400,
-      message: `Please enter a valid reservation_date and reservation_time.`
-    })
+      message: `Please enter a valid reservation_date and reservation_time.`,
+    });
   }
 
   const todaysDate = new Date();
@@ -114,8 +121,8 @@ function reservationIsInFuture(req, res, next) {
   if (submittedDate < todaysDate) {
     return next({
       status: 400,
-      message: `Reservations must be placed in the future.`
-    })
+      message: `Reservations must be placed in the future.`,
+    });
   }
   next();
 }
@@ -124,23 +131,24 @@ function reservationIsInFuture(req, res, next) {
 // business hours: 10:30 AM - 9:30 PM, everyday except Tuesday
 function isDuringBusinessHours(req, res, next) {
   let { reservation_date, reservation_time } = req.body.data;
- // getDay returns a num 0-6 where 0 is Monday, 6 is Sunday
- //validation check for 1 --> Tuesday
+  console.log(reservation_date);
+  // getDay returns a num 0-6 where 0 is Monday, 6 is Sunday
+  //validation check for 1 --> Tuesday
   const dayNum = new Date(reservation_date).getDay();
   if (dayNum === 1) {
     return next({
       status: 400,
-      message: `Sorry! We're closed on Tuesdays!`
-    })
+      message: `Sorry! We're closed on Tuesdays!`,
+    });
   }
 
   reservation_time = reservation_time.replace(":", "");
   if (reservation_time < 1030 || reservation_time > 1730) {
     return next({
       status: 400,
-      message: `Please place a reservation during business hours: 10:30 AM - 9:30 PM`
-    })
-  };
+      message: `Please place a reservation during business hours: 10:30 AM - 9:30 PM`,
+    });
+  }
 
   next();
 }
