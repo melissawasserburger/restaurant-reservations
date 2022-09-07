@@ -42,7 +42,6 @@ function hasRequiredFields(req, res, next) {
 function hasValidFieldInputs(req, res, next) {
   let { first_name, last_name, mobile_number, people } = req.body.data;
 
-
   if (people <= 0 || typeof people !== "number") {
     return next({
       status: 400,
@@ -152,11 +151,29 @@ function isDuringBusinessHours(req, res, next) {
     - req has all required fields
     - req has all valid entries of fields
     - reservation is NOT in the past
-    - reservation DOES NOT take place on Tuesday, and within 10:30 AM - 9:30 PM timeframe
+    - reservation DOES NOT take place on Tuesday, or within 10:30 AM - 9:30 PM timeframe
 */
 async function create(req, res, next) {
   const data = await service.create(req.body.data);
   res.status(201).json({ data });
+}
+
+async function reservationExists(req, res, next) {
+  const { reservation_Id } = req.params;
+  const reservation = await service.read(reservation_Id);
+  if (reservation) {
+    res.locals.reservation = reservation;
+    return next();
+  }
+  next({
+    status: 404,
+    message: `Reservation ${reservation_Id} not found.`,
+  });
+}
+
+async function read(req, res, next) {
+  const reservation = res.locals.reservation;
+  res.status(200).json({ data: reservation })
 }
 
 module.exports = {
@@ -169,4 +186,5 @@ module.exports = {
     isDuringBusinessHours,
     asyncErrorBoundary(create),
   ],
+  read: [asyncErrorBoundary(reservationExists), asyncErrorBoundary(read)],
 };

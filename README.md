@@ -160,7 +160,7 @@ so that I know how many customers will arrive at the restaurant on a given day.
 <!-- 
 #### Acceptance Criteria -->
 
-1. The `/reservations/new` page will
+<!-- 1. The `/reservations/new` page will -->
    <!-- - have the following required and not-nullable fields:
      - First name: `<input name="first_name" />`
      - Last name: `<input name="last_name" />`
@@ -171,7 +171,7 @@ so that I know how many customers will arrive at the restaurant on a given day.
    - display a `Submit` button that, when clicked, saves the new reservation, then displays the `/dashboard` page for the date of the new reservation
    - display a `Cancel` button that, when clicked, returns the user to the previous page -->
    - display any error messages returned from the API (almost done, needs to display multiple)
-1. The `/dashboard` page will
+<!-- 1. The `/dashboard` page will -->
    <!-- - list all reservations for one date only. (E.g. if the URL is `/dashboard?date=2035-12-30` then send a GET to `/reservations?date=2035-12-30` to list the reservations for that date). The date is defaulted to today, and the reservations are sorted by time. -->
    <!-- - display next, previous, and today buttons that allow the user to see reservations on other dates -->
    <!-- - display any error messages returned from the API -->
@@ -267,9 +267,9 @@ When a customer with an existing reservation arrives at the restaurant<br/>
 I want to seat (assign) their reservation to a specific table<br/>
 so that I know which tables are occupied and free.
 
-#### Acceptance Criteria
+<!-- #### Acceptance Criteria -->
 
-1. The `/tables/new` page will
+<!-- 1. The `/tables/new` page will -->
    <!-- - have the following required and not-nullable fields:
      - Table name: `<input name="table_name" />`, which must be at least 2 characters long.
      - Capacity: `<input name="capacity" />`, this is the number of people that can be seated at the table, which must be at least 1 person. -->
@@ -285,22 +285,22 @@ so that I know which tables are occupied and free.
      <!-- - Each table will display "Free" or "Occupied" depending on whether a reservation is seated at the table. -->
      <!-- - The "Free" or "Occupied" text must have a `data-table-id-status=${table.table_id}` attribute, so it can be found by the tests. -->
 
-1. The `/reservations/:reservation_id/seat` page will
+<!-- 1. The `/reservations/:reservation_id/seat` page will -->
    <!-- - have the following required and not-nullable fields:
      - Table number: `<select name="table_id" />`. The text of each option must be `{table.table_name} - {table.capacity}` so the tests can find the options. -->
-   - do not seat a reservation with more people than the capacity of the table
-   - display a `Submit` button that, when clicked, assigns the table to the reservation then displays the `/dashboard` page
-   - PUT to `/tables/:table_id/seat/` in order to save the table assignment. The body of the request must be `{ data: { reservation_id: x } }` where X is the reservation_id of the reservation being seated. The tests do not check the body returned by this request.
-   - display a `Cancel` button that, when clicked, returns the user to the previous page
+   <!-- - do not seat a reservation with more people than the capacity of the table -->
+   <!-- - display a `Submit` button that, when clicked, assigns the table to the reservation then displays the `/dashboard` page -->
+   <!-- - PUT to `/tables/:table_id/seat/` in order to save the table assignment. The body of the request must be `{ data: { reservation_id: x } }` where X is the reservation_id of the reservation being seated. The tests do not check the body returned by this request. -->
+   <!-- - display a `Cancel` button that, when clicked, returns the user to the previous page -->
 <!-- 1. The `tables` table must be seeded with the following data: -->
    <!-- - `Bar #1` & `Bar #2`, each with a capacity of 1. -->
    <!-- - `#1` & `#2`, each with a capacity of 6. -->
-1. The `/tables` API will have the same validations as above and will return 400, along with an informative error message, when a validation error happens.
+<!-- 1. The `/tables` API will have the same validations as above and will return 400, along with an informative error message, when a validation error happens.
 
-- if the table capacity is less than the number of people in the reservation, return 400 with an error message.
-- if the table is occupied, return 400 with an error message.
-
-> **Hint** Work through the acceptance criteria in the order listed, step-by-step. A different order may be more challenging.
+- if the table capacity is less than the number of people in the reservation, return 400 with an error message. -->
+<!-- - if the table is occupied, return 400 with an error message. -->
+<!-- 
+> **Hint** Work through the acceptance criteria in the order listed, step-by-step. A different order may be more challenging. -->
 
 <!-- > **Hint** Seed the `tables` table in a similar way as it's done with the `reservations` table.
 

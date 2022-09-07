@@ -18,8 +18,6 @@ function Dashboard({ date }) {
   const dateQueryStart = (urlQuery.search("date") + 5);
   date = urlQuery.slice(dateQueryStart, dateQueryStart + 10) || date;
 
-  console.log(useLocation.pathname)
-
   useEffect(loadDashboard, [date]);
 
   function loadDashboard() {

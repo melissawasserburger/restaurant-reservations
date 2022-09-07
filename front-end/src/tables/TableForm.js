@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
-//import ErrorAlert from "./ErrorAlert";
+import ErrorAlert from "../layout/ErrorAlert";
 
 const { REACT_APP_API_BASE_URL } = process.env;
 
@@ -14,19 +14,18 @@ function TableForm() {
 
   const [formState, setFormState] = useState(initialFormState);
   const [error, setError] = useState(undefined);
-  const [errorMessage, setErrorMessage] = useState(undefined);
 
 //   const errors = [];
 //   errors.map((error) => {
 //     return <ErrorAlert errorMessage={error} />
 //   })
 
-  useEffect(() => {
-    const abortController = new AbortController();
-    setErrorMessage([error]);
+  // useEffect(() => {
+  //   const abortController = new AbortController();
+  //   setError([error]);
   
-    return () => abortController.abort()
-  }, [error])
+  //   return () => abortController.abort()
+  // }, [error])
 
   const changeHandler = ({ target }) => {
     setFormState({ ...formState, [target.name]: target.value });
@@ -39,6 +38,7 @@ function TableForm() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    formState.capacity = Number(formState.capacity);
     const response = await fetch(`${REACT_APP_API_BASE_URL}/tables`, {
       method: "POST",
       headers: {
@@ -47,7 +47,7 @@ function TableForm() {
       body: JSON.stringify({data: formState}),
     });
     const resData = await response.json();
-
+    console.log(resData)
     if (resData.error) {
       setError(resData.error);
     }
@@ -60,7 +60,7 @@ function TableForm() {
 
   return (
     <div>
-    {error ? <></> : <></>}
+    {error ? <ErrorAlert errorMessage={error}/> : <></>}
     <div className="form-group">
       <form onSubmit={submitHandler}>
         <label htmlFor="table_name">Table Name</label>

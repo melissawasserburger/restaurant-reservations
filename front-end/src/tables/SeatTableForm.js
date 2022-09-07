@@ -1,32 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { listTables } from "../utils/api";
-//import ErrorAlert from "./ErrorAlert";
+import ErrorAlert from "../layout/ErrorAlert";
 
 const { REACT_APP_API_BASE_URL } = process.env;
 
 
-// !! this component is very much a work in progress
-// submitHandler is able to grab the selected value, but the fetch request is incomplete
 function SeatTableForm() {
   const history = useHistory();
   const { reservation_id } = useParams();
 
   const [tables, setTables] = useState([]);
-  const [tablesError, setTablesError] = useState(null);
+  const [error, setError] = useState(undefined);
 
   function loadTables() {
     const abortController = new AbortController();
-    setTablesError(null);
+    setError(null);
 
-    listTables(abortController.signal).then(setTables).catch(setTablesError);
+    listTables(abortController.signal).then(setTables).catch(setError);
 
     return () => abortController.abort();
   }
 
   useEffect(loadTables, []);
 
-  const [error, setError] = useState(undefined);
+
   //const [errorMessage, setErrorMessage] = useState(undefined);
 
   //   const errors = [];
@@ -42,18 +40,28 @@ function SeatTableForm() {
   //   }, [error]);
 
 
+  // the value selected in the form is used to determine where to send the data
+  // ex. PUT request to "/tables/1/seat" to update the reservation_id column in "tables"
   const submitHandler = async (e) => {
     e.preventDefault();
     const form = document.getElementById("select");
     const value = form.value;
-    console.log(value);
-    const response = await fetch(`${REACT_APP_API_BASE_URL}/reservations`, {
+    const response = await fetch(`${REACT_APP_API_BASE_URL}/tables/${value}/seat`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({data: value}),
+        body: JSON.stringify({data: { reservation_id: reservation_id }}),
       });
+      const resData = await response.json();
+      console.log(resData)
+      if (resData.error) {
+        setError(resData.error);
+      }
+    
+      if (response.status !== 400) {
+        history.push(`/dashboard`);
+      }
   };
 
   const tableOptions = tables.map((table, index) => {
@@ -66,7 +74,7 @@ function SeatTableForm() {
 
   return (
     <div>
-      {error ? <></> : <></>}
+      {error ? <ErrorAlert errorMessage={error}/> : <></>}
       <div className="form-group">
         <form onSubmit={submitHandler}>
           <label htmlFor="table_id">Choose a table:</label>
