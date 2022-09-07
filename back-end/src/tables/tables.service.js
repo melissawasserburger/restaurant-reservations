@@ -39,10 +39,21 @@ async function update(newTableData) {
         }, "*");
 }
 
+async function destroy(table_id) {
+    return knex("tables")
+        .select("*")
+        .where({table_id: table_id})
+        .update({
+            reservation_id: null,
+            status: "Free" 
+        });
+}
+
 module.exports = {
     list, 
     create,
     read,
     readReservation,
     update,
+    delete: destroy,
 }

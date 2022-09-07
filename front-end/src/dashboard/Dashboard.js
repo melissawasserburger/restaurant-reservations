@@ -47,6 +47,7 @@ function Dashboard({ date }) {
     <TablesList
     key={index}
     table={table}
+    setError={setReservationsError}
     />
   ));
 

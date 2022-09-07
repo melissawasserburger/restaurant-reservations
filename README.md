@@ -275,15 +275,15 @@ so that I know which tables are occupied and free.
      - Capacity: `<input name="capacity" />`, this is the number of people that can be seated at the table, which must be at least 1 person. -->
    <!-- - display a `Submit` button that, when clicked, saves the new table then displays the `/dashboard` page
    - display a `Cancel` button that, when clicked, returns the user to the previous page -->
-1. The `/dashboard` page will:
+<!-- 1. The `/dashboard` page will:
 
-   - display a list of all reservations in one area. ?? what does "one area" mean
+   - display a list of all reservations in one area. ?? what does "one area" mean -->
    <!-- - each reservation in the list will: -->
-     <!-- - Display a "Seat" button on each reservation.
+  <!-- - Display a "Seat" button on each reservation.
      - The "Seat" button must be a link with an `href` attribute that equals `/reservations/${reservation_id}/seat`, so it can be found by the tests. -->
    <!-- - display a list of all tables, sorted by `table_name`, in another area of the dashboard -->
-     <!-- - Each table will display "Free" or "Occupied" depending on whether a reservation is seated at the table. -->
-     <!-- - The "Free" or "Occupied" text must have a `data-table-id-status=${table.table_id}` attribute, so it can be found by the tests. -->
+  <!-- - Each table will display "Free" or "Occupied" depending on whether a reservation is seated at the table. -->
+  <!-- - The "Free" or "Occupied" text must have a `data-table-id-status=${table.table_id}` attribute, so it can be found by the tests. -->
 
 <!-- 1. The `/reservations/:reservation_id/seat` page will -->
    <!-- - have the following required and not-nullable fields:

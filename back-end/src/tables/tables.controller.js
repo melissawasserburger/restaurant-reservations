@@ -17,7 +17,7 @@ const VALID_PROPERTIES = ["table_name", "capacity"];
 
 function hasRequiredFields(req, res, next) {
   const { data = {} } = req.body;
-  console.log(data)
+  console.log(data);
   const map = new Map();
 
   for (let property in data) {
@@ -91,27 +91,27 @@ function tableIsAvailable(req, res, next) {
 }
 
 async function reservationExists(req, res, next) {
-    const { data } = req.body;
+  const { data } = req.body;
 
-    if (!data || !data.reservation_id) {
-        return next({
-            status: 400,
-            message: `Missing valid reservation_id.`
-        })
-    }
+  if (!data || !data.reservation_id) {
+    return next({
+      status: 400,
+      message: `Missing valid reservation_id.`,
+    });
+  }
 
-    const { reservation_id } = data;
+  const { reservation_id } = data;
 
-    const reservationData = await service.readReservation(reservation_id);
-    if (reservationData) {
-        res.locals.people = reservationData.people;
-        return next();
-    }
+  const reservationData = await service.readReservation(reservation_id);
+  if (reservationData) {
+    res.locals.people = reservationData.people;
+    return next();
+  }
 
-    next({
-        status: 404,
-        message: `Reservation ${reservation_id} cannot be found.`
-    })
+  next({
+    status: 404,
+    message: `Reservation ${reservation_id} cannot be found.`,
+  });
 }
 
 function tableHasCapacity(req, res, next) {
@@ -137,6 +137,12 @@ async function update(req, res, next) {
   res.status(200).json({ data: data });
 }
 
+async function destroy(req, res, next) {
+  const table = res.locals.table;
+  await service.delete(table.table_id);
+  res.sendStatus(204);
+}
+
 module.exports = {
   list: [asyncErrorBoundary(list)],
   create: [hasRequiredFields, hasValidFieldInputs, asyncErrorBoundary(create)],
@@ -147,4 +153,5 @@ module.exports = {
     tableIsAvailable,
     asyncErrorBoundary(update),
   ],
+  delete: [asyncErrorBoundary(tableExists), asyncErrorBoundary(destroy)],
 };
