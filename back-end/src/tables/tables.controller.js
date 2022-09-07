@@ -75,7 +75,7 @@ async function tableExists(req, res, next) {
 
   next({
     status: 404,
-    message: `Table cannot be found.`,
+    message: `Table ${table_id} cannot be found.`,
   });
 }
 
@@ -86,6 +86,17 @@ function tableIsAvailable(req, res, next) {
       status: 400,
       message: `Reservation cannot be seated. Table is occupied.`,
     });
+  }
+  next();
+}
+
+function tableIsOccupied(req, res, next) {
+  const table = res.locals.table;
+  if (table.status === "Free") {
+    return next({
+      status: 400,
+      message: `Error: Table ${table.table_name} is not occupied and therefore cannot be cleared.`
+    })
   }
   next();
 }
@@ -140,7 +151,7 @@ async function update(req, res, next) {
 async function destroy(req, res, next) {
   const table = res.locals.table;
   await service.delete(table.table_id);
-  res.sendStatus(204);
+  res.sendStatus(200);
 }
 
 module.exports = {
@@ -153,5 +164,5 @@ module.exports = {
     tableIsAvailable,
     asyncErrorBoundary(update),
   ],
-  delete: [asyncErrorBoundary(tableExists), asyncErrorBoundary(destroy)],
+  delete: [asyncErrorBoundary(tableExists), tableIsOccupied, asyncErrorBoundary(destroy)],
 };

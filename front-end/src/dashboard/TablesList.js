@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 const { REACT_APP_API_BASE_URL } = process.env;
 
 function TablesList({ table, setError }) {
-  const { table_id, table_name, capacity, status } = table;
+  const { table_id, table_name, capacity, reservation_id } = table;
   const history = useHistory();
 
   async function finishBtnHandler() {
@@ -38,16 +38,16 @@ function TablesList({ table, setError }) {
         <li className="list-group-item">Capacity: {capacity}</li>
         <li
           className="list-group-item"
-          data-table-id-status={table_id}
+          data-table-id-status={table.table_id}
         >
-          Status: {status}
+          Status: {reservation_id ? "Occupied": "Free" }
         </li>
       </ul>
-      {status === "Occupied" ? (
+      {reservation_id ? (
         <button
           type="button"
           className="btn btn-primary"
-          data-table-id-finish={table_id}
+          data-table-id-finish={table.table_id}
           onClick={finishBtnHandler}
         >
           Finish
