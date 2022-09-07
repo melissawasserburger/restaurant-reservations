@@ -315,8 +315,8 @@ so that I can seat new guests at that table.<br/>
 #### Acceptance Criteria
 
 1. The `/dashboard` page will
-   - Display a "Finish" button on each _occupied_ table.
-   - the "Finish" button must have a `data-table-id-finish={table.table_id}` attribute, so it can be found by the tests.
+   <!-- - Display a "Finish" button on each _occupied_ table. -->
+   <!-- - the "Finish" button must have a `data-table-id-finish={table.table_id}` attribute, so it can be found by the tests. -->
    - Clicking the "Finish" button will display the following confirmation: "Is this table ready to seat new guests? This cannot be undone." If the user selects "Ok" the system will: - Send a `DELETE` request to `/tables/:table_id/seat` in order to remove the table assignment. The tests do not check the body returned by this request. - The server should return 400 if the table is not occupied. - Refresh the list of tables to show that the table is now available.
    - Clicking the "Cancel" makes no changes.
 

@@ -137,7 +137,6 @@ function isDuringBusinessHours(req, res, next) {
   }
 
   reservation_time = reservation_time.replace(":", "");
-  console.log(reservation_time)
   if (reservation_time < 1030 || reservation_time > 2130) {
     return next({
       status: 400,

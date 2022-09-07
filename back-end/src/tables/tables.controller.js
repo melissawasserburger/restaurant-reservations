@@ -17,6 +17,7 @@ const VALID_PROPERTIES = ["table_name", "capacity"];
 
 function hasRequiredFields(req, res, next) {
   const { data = {} } = req.body;
+  console.log(data)
   const map = new Map();
 
   for (let property in data) {
@@ -80,7 +81,6 @@ async function tableExists(req, res, next) {
 
 function tableIsAvailable(req, res, next) {
   const table = res.locals.table;
-  console.log(table)
   if (table.status === "Occupied") {
     return next({
       status: 400,

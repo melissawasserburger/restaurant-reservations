@@ -38,7 +38,7 @@ function SeatTableForm() {
         body: JSON.stringify({data: { reservation_id: reservation_id }}),
       });
       const resData = await response.json();
-      console.log(resData)
+
       if (resData.error) {
         setError(resData.error);
       }

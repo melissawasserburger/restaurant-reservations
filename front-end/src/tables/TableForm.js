@@ -9,23 +9,11 @@ function TableForm() {
 
   const initialFormState = {
     table_name: "",
-    capacity: 1,
+    capacity: 0,
   };
 
   const [formState, setFormState] = useState(initialFormState);
   const [error, setError] = useState(undefined);
-
-//   const errors = [];
-//   errors.map((error) => {
-//     return <ErrorAlert errorMessage={error} />
-//   })
-
-  // useEffect(() => {
-  //   const abortController = new AbortController();
-  //   setError([error]);
-  
-  //   return () => abortController.abort()
-  // }, [error])
 
   const changeHandler = ({ target }) => {
     setFormState({ ...formState, [target.name]: target.value });
@@ -46,8 +34,8 @@ function TableForm() {
       },
       body: JSON.stringify({data: formState}),
     });
+    
     const resData = await response.json();
-    console.log(resData)
     if (resData.error) {
       setError(resData.error);
     }
@@ -69,7 +57,6 @@ function TableForm() {
           type="text"
           id="table_name"
           name="table_name"
-          pattern="\S{2}"
           title="Table names must be at least 2 characters long."
           value={formState.table_name}
           onChange={changeHandler}
