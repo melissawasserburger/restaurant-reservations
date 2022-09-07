@@ -12,6 +12,7 @@ function TablesList({ table }) {
           <li className="list-group-item">Capacity: {capacity}</li>
           <li className="list-group-item" id={`data-table-id-status=${table.table_id}`}>Status: {status}</li>
         </ul>
+        {status === "Occupied" ? <button type="button" className="btn btn-primary">Finish</button> : <></>}
       </div>
     )
 }

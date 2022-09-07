@@ -24,22 +24,6 @@ function SeatTableForm() {
 
   useEffect(loadTables, []);
 
-
-  //const [errorMessage, setErrorMessage] = useState(undefined);
-
-  //   const errors = [];
-  //   errors.map((error) => {
-  //     return <ErrorAlert errorMessage={error} />
-  //   })
-
-  //   useEffect(() => {
-  //     const abortController = new AbortController();
-  //     setErrorMessage([error]);
-
-  //     return () => abortController.abort();
-  //   }, [error]);
-
-
   // the value selected in the form is used to determine where to send the data
   // ex. PUT request to "/tables/1/seat" to update the reservation_id column in "tables"
   const submitHandler = async (e) => {

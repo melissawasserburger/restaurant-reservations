@@ -114,7 +114,7 @@ async function reservationExists(req, res, next) {
     })
 }
 
-async function tableHasCapacity(req, res, next) {
+function tableHasCapacity(req, res, next) {
   const table = res.locals.table;
   const people = res.locals.people;
   if (people > table.capacity) {
