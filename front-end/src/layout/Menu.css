@@ -1,26 +1,35 @@
 #background-container {
     width: stretch;
-    height: 7rem;
+    height: 14rem;
     background: #ffffff url("../photos/restaurant.jpg") no-repeat right top;
     background-size: cover;
     align-items: center;
     border-bottom: black solid 2px;
 }
 
-#logo {
-    color: white;
-    background-color: rgba(48, 48, 48, 0.500); 
-    font-family: 'Satisfy', cursive;
-    font-size: 45px;
-    width: fit-content;
-    margin-left: 10px;
-    padding: 1rem 2.5rem;
-    z-index: 1;
+#accordionSidebar {
+    font-size: 1rem;
+    list-style: none;
+    padding: 0px 30px;
+    background-color: rgba(48, 48, 48, 0.500);
+    z-index: 2;
 }
 
-#nav {
+#logo {
+    color: white;
+    font-family: 'Satisfy', cursive;
+    font-size: 5rem;
+    width: fit-content;
+    z-index: 1;
+    justify-items: center;
+}
+
+#logo-background {
+    height: 9rem;
     background-color: rgba(48, 48, 48, 0.500); 
-    height:6.5rem;
-    z-index: 2;
+}
+
+#address-text {
+    font-size: 1.25rem;
 }
 

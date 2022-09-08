@@ -1,6 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router";
 
+import "./Tables.css";
+
 const { REACT_APP_API_BASE_URL } = process.env;
 
 function TablesList({ table, setError }) {
@@ -32,9 +34,9 @@ function TablesList({ table, setError }) {
   }
 
   return (
-    <div className="card mx-3">
-      <div className="card-header">Table: {table_name}</div>
-      <ul className="list-group list-group-flush">
+    <div id="whole-card" className="mx-3">
+      <h4 id="table-name">Table: {table_name}</h4>
+      <ul id="table-info" className="list-group list-group-flush">
         <li className="list-group-item">Capacity: {capacity}</li>
         <li
           className="list-group-item"
@@ -43,9 +45,11 @@ function TablesList({ table, setError }) {
           Status: {reservation_id ? "Occupied": "Free" }
         </li>
       </ul>
+      <div className="d-flex justify-content-center">
       {reservation_id ? (
         <button
           type="button"
+          id="finish-btn"
           className="btn btn-primary"
           data-table-id-finish={table.table_id}
           onClick={finishBtnHandler}
@@ -55,6 +59,7 @@ function TablesList({ table, setError }) {
       ) : (
         <></>
       )}
+      </div>
     </div>
   );
 }

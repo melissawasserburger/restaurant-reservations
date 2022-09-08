@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./Menu.css"
+import "./Menu.css";
 /**
  * Defines the menu for this application.
  *
@@ -10,14 +10,21 @@ import "./Menu.css"
 
 function Menu() {
   return (
-        <div id="background-container" className="row d-flex justify-content-between side-bar">
+    <div
+      id="background-container"
+      className="row justify-content-between side-bar"
+    >
+      <div id="logo-background" className="d-flex flex-column mx-4">
         <Link to="/">
-          <div className="col d-flex flex-wrap">
-            <span id="logo">Periodic Tables</span>
-          </div>
+          <h1 id="logo">Periodic Tables</h1>
         </Link>
-        <nav id="nav" className="row align-items-center">
-        <ul className="col d-flex flex-wrap nav" id="accordionSidebar">
+        <div className="row d-inline-flex flex-wrap justify-content-around">
+        <p id="address-text" className="text-white"> 1412 W Main St</p>
+        <p id="address-text" className="text-white">Artesia, NY | 88210</p>
+        </div>
+      </div>
+      <nav id="nav" className="col d-inline-flex flex-wrap justify-content-end align-items-center">
+        <ul className="align-middle" id="accordionSidebar">
           <li className="nav-item">
             <Link className="text-light nav-link" to="/dashboard">
               <span className="oi oi-dashboard" />
@@ -50,7 +57,7 @@ function Menu() {
             type="button"
           />
         </div>
-    </nav>
+      </nav>
     </div>
   );
 }
