@@ -161,6 +161,7 @@ async function create(req, res, next) {
 async function reservationExists(req, res, next) {
   const { reservation_Id } = req.params;
   const reservation = await service.read(reservation_Id);
+
   if (reservation) {
     res.locals.reservation = reservation;
     return next();
@@ -176,6 +177,16 @@ async function read(req, res, next) {
   res.status(200).json({ data: reservation })
 }
 
+async function update(req, res, next) {
+  const existingReservation = res.locals.reservation;
+  const newReservation = {
+    ...existingReservation,
+  };
+  const data = await service.update(newReservation);
+  console.log(data)
+  res.status(200).json({ data: data });
+}
+
 module.exports = {
   list: [asyncErrorBoundary(list)],
   create: [
@@ -187,4 +198,5 @@ module.exports = {
     asyncErrorBoundary(create),
   ],
   read: [asyncErrorBoundary(reservationExists), asyncErrorBoundary(read)],
+  update: [asyncErrorBoundary(reservationExists), asyncErrorBoundary(update)]
 };

@@ -17,7 +17,6 @@ const VALID_PROPERTIES = ["table_name", "capacity"];
 
 function hasRequiredFields(req, res, next) {
   const { data = {} } = req.body;
-  console.log(data);
   const map = new Map();
 
   for (let property in data) {

@@ -275,17 +275,17 @@ so that I can see which reservation parties are seated, and finished reservation
 
 #### Acceptance Criteria
 
-1. The `/dashboard` page will
-   - display the status of the reservation. The default status is "booked"
-     - the status text must have a `data-reservation-id-status={reservation.reservation_id}` attribute, so it can be found by the tests.
-   - display the Seat button only when the reservation status is "booked".
-   - clicking the Seat button changes the status to "seated" and hides the Seat button.
+<!-- 1. The `/dashboard` page will -->
+   <!-- - display the status of the reservation. The default status is "booked"
+     - the status text must have a `data-reservation-id-status={reservation.reservation_id}` attribute, so it can be found by the tests. -->
+   <!-- - display the Seat button only when the reservation status is "booked". -->
+   <!-- - clicking the Seat button changes the status to "seated" and hides the Seat button. -->
    - clicking the Finish button associated with the table changes the reservation status to "finished" and removes the reservation from the dashboard.
    - to set the status, PUT to `/reservations/:reservation_id/status` with a body of `{data: { status: "<new-status>" } }` where `<new-status>` is one of booked, seated, or finished. Please note that this is only tested in the back-end for now.
 
-> **Hint** You can add a field to a table in a migration `up` method by defining a new column. E.g. `table.string("last_name", null).notNullable();` will create a new last_name column.  Be sure to remove the column in the `down` function using `dropColumn()`. E.g. `table.dropColumn("last_name");`
+<!-- > **Hint** You can add a field to a table in a migration `up` method by defining a new column. E.g. `table.string("last_name", null).notNullable();` will create a new last_name column.  Be sure to remove the column in the `down` function using `dropColumn()`. E.g. `table.dropColumn("last_name");`
 
-> **Hint** Use [`Knex.transaction()`](http://knexjs.org/#Transactions) to make sure the `tables` and `reservations` records are always in sync with each other.
+> **Hint** Use [`Knex.transaction()`](http://knexjs.org/#Transactions) to make sure the `tables` and `reservations` records are always in sync with each other. -->
 
 ### US-07 Search for a reservation by phone number
 

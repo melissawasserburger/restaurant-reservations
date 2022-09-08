@@ -29,7 +29,6 @@ async function readReservation(reservation_id) {
 }
 
 async function update(newTableData) {
-    console.log(newTableData.reservation_id)
     return knex("tables")
         .select("*")
         .where({table_id: newTableData.table_id})

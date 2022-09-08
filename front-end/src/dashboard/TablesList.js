@@ -20,45 +20,53 @@ function TablesList({ table, setError }) {
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify({data: {}}),
+          body: JSON.stringify({ data: {} }),
         }
       );
 
       if (response.status !== 400) {
-        history.push("/")
+        history.push("/");
       } else {
-        console.log("there was an error")
-        console.log(response)
+        console.log("there was an error");
+        console.log(response);
       }
     }
   }
 
   return (
     <div id="whole-card" className="mx-3">
-      <h4 id="table-name">Table: {table_name}</h4>
-      <ul id="table-info" className="list-group list-group-flush">
-        <li className="list-group-item">Capacity: {capacity}</li>
-        <li
-          className="list-group-item"
-          data-table-id-status={table.table_id}
-        >
-          Status: {reservation_id ? "Occupied": "Free" }
-        </li>
+      <div className="row d-flex justify-content-center">
+        <h4 id="table-name">Table: {table_name}</h4>
+      </div>
+      <ul>
+        <div className="row d-flex justify-content-around">
+          <li id="table-info">
+            <span className="col">Capacity: </span><span className="col" id="table-info-value">{capacity}</span>
+          </li>
+        </div>
+        <div className="row d-flex justify-content-around">
+          <li id="table-info" data-table-id-status={table.table_id}>
+          <span className="col">Status: </span>{" "}
+            <span id="table-info-value">
+              {reservation_id ? "Occupied" : "Free"}
+            </span>
+          </li>
+        </div>
       </ul>
       <div className="d-flex justify-content-center">
-      {reservation_id ? (
-        <button
-          type="button"
-          id="finish-btn"
-          className="btn btn-primary"
-          data-table-id-finish={table.table_id}
-          onClick={finishBtnHandler}
-        >
-          Finish
-        </button>
-      ) : (
-        <></>
-      )}
+        {reservation_id ? (
+          <button
+            type="button"
+            id="finish-btn"
+            className="btn btn-primary"
+            data-table-id-finish={table.table_id}
+            onClick={finishBtnHandler}
+          >
+            Finish
+          </button>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
