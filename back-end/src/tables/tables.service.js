@@ -23,7 +23,7 @@ async function read(table_id) {
 
 async function readReservation(reservation_id) {
     return knex("reservations")
-        .select("people")
+        .select("*")
         .where({reservation_id: reservation_id})
         .first();
 }
@@ -34,8 +34,16 @@ async function update(newTableData) {
         .where({table_id: newTableData.table_id})
         .update({
             reservation_id: newTableData.reservation_id,
-            status: "Occupied"
         }, "*");
+}
+
+async function updateReservation(reservation_id) {
+    return knex("reservations")
+        .select("*")
+        .where({reservation_id: reservation_id})
+        .update({
+            status: "finished",
+        }, "*")
 }
 
 async function destroy(table_id) {
@@ -44,8 +52,7 @@ async function destroy(table_id) {
         .where({table_id: table_id})
         .update({
             reservation_id: null,
-            status: "Free" 
-        });
+        }, "*");
 }
 
 module.exports = {
@@ -54,5 +61,6 @@ module.exports = {
     read,
     readReservation,
     update,
+    updateReservation,
     delete: destroy,
 }

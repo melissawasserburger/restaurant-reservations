@@ -3,7 +3,11 @@ const knex = require("../db/connection");
 async function list(date) {
     return knex("reservations")
         .select("*")
-        .where({"reservation_date": date})
+        .where({
+            "reservation_date": date,
+            status: "seated",
+            status: "booked",
+        })
         .orderBy("reservation_time")
 }
 
@@ -21,11 +25,11 @@ async function read(reservation_Id) {
         .first();
 }
 
-async function update(newReservation) {
+async function update(reservation_id) {
     return knex("reservations")
         .select("*")
-        .where({reservation_id: newReservation.reservation_id})
-        .update({status: "Seated"}, "*")
+        .where({reservation_id: reservation_id})
+        .update({status: "seated"}, "*")
 }
 
 module.exports = {

@@ -10,6 +10,7 @@ function TablesList({ table, setError }) {
   const history = useHistory();
 
   async function finishBtnHandler() {
+    console.log(table)
     const alertMessage =
       "Is this table ready to seat new guests?\nThis cannot be undone.";
     if (window.confirm(alertMessage) === true) {
@@ -20,15 +21,15 @@ function TablesList({ table, setError }) {
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify({ data: {} }),
+          body: JSON.stringify({ data: reservation_id }),
         }
       );
 
       if (response.status !== 400) {
+        console.log("finish btn handler before push")
         history.push("/");
       } else {
         console.log("there was an error");
-        console.log(response);
       }
     }
   }
@@ -46,7 +47,7 @@ function TablesList({ table, setError }) {
         </div>
         <div className="row d-flex justify-content-around">
           <li id="table-info" data-table-id-status={table.table_id}>
-          <span className="col">Status: </span>{" "}
+          <span className="col">Status: </span>
             <span id="table-info-value">
               {reservation_id ? "Occupied" : "Free"}
             </span>

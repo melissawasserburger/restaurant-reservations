@@ -147,11 +147,23 @@ function isDuringBusinessHours(req, res, next) {
   next();
 }
 
-/* validation currently checking if:
+function reservationStatus(req, res, next) {
+  const { status } = req.body.data;
+  if (status === "seated" || status === "finished" || status === "unknown") {
+    return next({
+      status: 400,
+      message: `Error: Reservation status cannot be booked. Status is: ${status}`
+    })
+  }
+  next();
+}
+
+/* validation for create currently checking if:
     - req has all required fields
     - req has all valid entries of fields
     - reservation is NOT in the past
     - reservation DOES NOT take place on Tuesday, or within 10:30 AM - 9:30 PM timeframe
+    - reservation status is not "seated" or "finished"
 */
 async function create(req, res, next) {
   const data = await service.create(req.body.data);
@@ -161,7 +173,6 @@ async function create(req, res, next) {
 async function reservationExists(req, res, next) {
   const { reservation_Id } = req.params;
   const reservation = await service.read(reservation_Id);
-
   if (reservation) {
     res.locals.reservation = reservation;
     return next();
@@ -172,19 +183,39 @@ async function reservationExists(req, res, next) {
   });
 }
 
+function unknownStatus(req, res, next) {
+  const { data = {} } = req.body;
+  if (data["status"] === "unknown") {
+    return next({
+      status: 400,
+      message: `unknown status`
+    })
+  }
+  next();
+}
+
+function isValueFinished(req, res, next) {
+  if (res.locals.reservation.status === "finished") {
+    return next({
+      status: 400,
+      message: `a finished reservation cannot be updated`
+    })
+  }
+  next();
+}
+
 async function read(req, res, next) {
   const reservation = res.locals.reservation;
   res.status(200).json({ data: reservation })
 }
 
 async function update(req, res, next) {
-  const existingReservation = res.locals.reservation;
   const newReservation = {
-    ...existingReservation,
+    ...req.body.data,
+    reservation_id: res.locals.reservation.reservation_id,
   };
-  const data = await service.update(newReservation);
-  console.log(data)
-  res.status(200).json({ data: data });
+  const data = await service.update(res.locals.reservation.reservation_id);
+  res.status(200).json({ data: newReservation });
 }
 
 module.exports = {
@@ -195,8 +226,9 @@ module.exports = {
     validDateAndTime,
     reservationIsInFuture,
     isDuringBusinessHours,
+    reservationStatus,
     asyncErrorBoundary(create),
   ],
   read: [asyncErrorBoundary(reservationExists), asyncErrorBoundary(read)],
-  update: [asyncErrorBoundary(reservationExists), asyncErrorBoundary(update)]
+  update: [asyncErrorBoundary(reservationExists), unknownStatus, isValueFinished, asyncErrorBoundary(update)]
 };
