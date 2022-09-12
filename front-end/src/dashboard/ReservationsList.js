@@ -41,7 +41,7 @@ function ReservationList({ reservation, formatTime }) {
         <p id="card-text">{people}</p>
       </div>
       <div className="d-flex justify-content-end">
-        {status === "Booked" ? (<button type="button" className="btn btn-secondary px-4 mr-4"><a className="text-light" href={`/reservations/${reservation_id}/seat`}>Seat</a></button>) : <></>}
+        {status === "booked" ? (<button type="button" className="btn btn-secondary px-4 mr-4"><a className="text-light" href={`/reservations/${reservation_id}/seat`}>Seat</a></button>) : <></>}
       </div>
     </div>
   );

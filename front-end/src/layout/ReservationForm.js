@@ -56,9 +56,10 @@ function ReservationForm() {
     if (resData.error) {
       setError(resData.error);
     }
-  
+
     if (response.status !== 400) {
       setFormState({ ...initialFormState });
+      console.log(resData.data.reservation_date)
       history.push(`/dashboard/?date=${resData.data.reservation_date}`);
     }
   };

@@ -7,10 +7,10 @@ const { REACT_APP_API_BASE_URL } = process.env;
 
 function TablesList({ table, setError }) {
   const { table_id, table_name, capacity, reservation_id } = table;
+
   const history = useHistory();
 
   async function finishBtnHandler() {
-    console.log(table)
     const alertMessage =
       "Is this table ready to seat new guests?\nThis cannot be undone.";
     if (window.confirm(alertMessage) === true) {
@@ -21,15 +21,15 @@ function TablesList({ table, setError }) {
           headers: {
             "Content-type": "application/json",
           },
-          body: JSON.stringify({ data: reservation_id }),
+          body: JSON.stringify({ data: {reservation_id: reservation_id} }),
         }
       );
 
+      const resData = await response.json();
       if (response.status !== 400) {
-        console.log("finish btn handler before push")
         history.push("/");
       } else {
-        console.log("there was an error");
+        setError(resData.error)
       }
     }
   }

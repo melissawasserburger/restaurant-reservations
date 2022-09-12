@@ -13,7 +13,7 @@ There are no user stories for logging: it is expected that you will add logging 
 <!-- This repository is set up as a *monorepo*, meaning that the frontend and backend projects are in one repository. This allows you to open both projects in the same editor.
 
 As you work through the user stories listed later in this document, you will be writing code that allows your frontend and backend applications to talk to each other. You will also write code to allow your controllers and services to connect to, and query, your PostgreSQL database via [Knex](http://knexjs.org/). -->
-/
+
 <!-- 
 ## Database setup
 

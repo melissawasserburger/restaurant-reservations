@@ -65,6 +65,16 @@ function hasValidFieldInputs(req, res, next) {
   next();
 }
 
+function checkForReqData(req, res, next) {
+    if (!req.body.data) {
+    return next({
+      status: 400,
+      message: `Error: Associated reservation_id cannot be found.`,
+    });
+  }
+  next();
+}
+
 async function tableExists(req, res, next) {
   const { table_id } = req.params;
 
@@ -74,7 +84,7 @@ async function tableExists(req, res, next) {
     return next();
   }
 
-  next({
+  return next({
     status: 404,
     message: `Table ${table_id} cannot be found.`,
   });
@@ -93,46 +103,47 @@ function tableIsAvailable(req, res, next) {
 
 function tableIsOccupied(req, res, next) {
   const table = res.locals.table;
-  if (table.reservation_id === null) {
+  if (!table.reservation_id) {
     return next({
       status: 400,
-      message: `Error: Table ${table.table_name} is not occupied and therefore cannot be cleared.`
-    })
+      message: `Error: Table ${table.table_name} is not occupied and therefore cannot be cleared.`,
+    });
   }
   next();
 }
 
 async function reservationExists(req, res, next) {
-  const { data } = req.body;
+  if (req.body.data) {
+    const { reservation_id } = req.body.data;
+    if (!reservation_id) {
+      return next({
+        status: 400,
+        message: `Missing valid reservation_id.`,
+      });
+    }
 
-  if (!data || !data.reservation_id) {
+    const reservationData = await service.readReservation(reservation_id);
+    if (reservationData) {
+      res.locals.reservation = reservationData;
+      return next();
+    }
+
     return next({
-      status: 400,
-      message: `Missing valid reservation_id.`,
+      status: 404,
+      message: `Error: reservation_id ${reservation_id} cannot be found.`,
     });
   }
-
-  const { reservation_id } = data;
-
-  const reservationData = await service.readReservation(reservation_id);
-  if (reservationData) {
-    res.locals.reservation = reservationData;
-    return next();
-  }
-
-  next({
-    status: 404,
-    message: `Reservation ${reservation_id} cannot be found.`,
-  });
+  next();
 }
 
 function tableHasCapacity(req, res, next) {
   const table = res.locals.table;
-  const people = res.locals.people;
-  if (people > table.capacity) {
+  const reservation = res.locals.reservation;
+
+  if (reservation.people > table.capacity) {
     return next({
       status: 400,
-      message: `Table ${table.table_name} does not have a capacity of ${people} people.`,
+      message: `Table ${table.table_name} does not have a capacity of ${reservation.people} people.`,
     });
   }
   next();
@@ -143,8 +154,8 @@ function reservationStatus(req, res, next) {
   if (reservation.status === "seated") {
     return next({
       status: 400,
-      message: `Error: Reservation is already seated.`
-    })
+      message: `Error: Reservation is already seated.`,
+    });
   }
   next();
 }
@@ -166,18 +177,19 @@ async function update(req, res, next) {
 
 async function destroy(req, res, next) {
   const table = res.locals.table;
-  const reservation = res.locals.reservation;
-  console.log(reservation)
-  console.log(reservation.reservation_id)
-  await service.updateReservation(reservation.reservation_id);
-  await service.delete(table.table_id);
-  res.sendStatus(200);
+  if (req.body.data) {
+    const { reservation_id } = req.body.data;
+    await service.updateReservation(reservation_id);
+  }
+  const tableData = await service.delete(table.table_id);
+  res.status(200).json({data: tableData});
 }
 
 module.exports = {
   list: [asyncErrorBoundary(list)],
   create: [hasRequiredFields, hasValidFieldInputs, asyncErrorBoundary(create)],
   update: [
+    checkForReqData,
     asyncErrorBoundary(tableExists),
     asyncErrorBoundary(reservationExists),
     tableHasCapacity,
@@ -185,5 +197,10 @@ module.exports = {
     reservationStatus,
     asyncErrorBoundary(update),
   ],
-  delete: [asyncErrorBoundary(tableExists), asyncErrorBoundary(reservationExists), tableIsOccupied, asyncErrorBoundary(destroy)],
+  delete: [
+    asyncErrorBoundary(tableExists),
+    tableIsOccupied,
+    asyncErrorBoundary(reservationExists),
+    asyncErrorBoundary(destroy),
+  ],
 };
