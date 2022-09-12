@@ -4,8 +4,14 @@ const moment = require("moment");
 
 async function list(req, res) {
   const date = req.query.date;
-  const data = await service.list(date);
-  res.json({ data: data });
+  const mobile_number = req.query.mobile_number;
+  let data = {};
+  if (mobile_number) {
+    data = await service.search(mobile_number);
+    return res.json({ data: data });
+  } 
+  data = await service.list(date);
+  return res.json({ data: data });
 }
 
 // VALIDATION PIPELINE STARTS HERE

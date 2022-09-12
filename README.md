@@ -280,8 +280,8 @@ so that I can see which reservation parties are seated, and finished reservation
      - the status text must have a `data-reservation-id-status={reservation.reservation_id}` attribute, so it can be found by the tests. -->
    <!-- - display the Seat button only when the reservation status is "booked". -->
    <!-- - clicking the Seat button changes the status to "seated" and hides the Seat button. -->
-   - clicking the Finish button associated with the table changes the reservation status to "finished" and removes the reservation from the dashboard.
-   - to set the status, PUT to `/reservations/:reservation_id/status` with a body of `{data: { status: "<new-status>" } }` where `<new-status>` is one of booked, seated, or finished. Please note that this is only tested in the back-end for now.
+   <!-- - clicking the Finish button associated with the table changes the reservation status to "finished" and removes the reservation from the dashboard.
+   - to set the status, PUT to `/reservations/:reservation_id/status` with a body of `{data: { status: "<new-status>" } }` where `<new-status>` is one of booked, seated, or finished. Please note that this is only tested in the back-end for now. -->
 
 <!-- > **Hint** You can add a field to a table in a migration `up` method by defining a new column. E.g. `table.string("last_name", null).notNullable();` will create a new last_name column.  Be sure to remove the column in the `down` function using `dropColumn()`. E.g. `table.dropColumn("last_name");`
 
@@ -293,7 +293,7 @@ As a restaurant manager<br/>
 I want to search for a reservation by phone number (partial or complete)<br/>
 so that I can quickly access a customer's reservation when they call about their reservation.<br/>
 
-#### Acceptance Criteria
+<!-- #### Acceptance Criteria
 
 1. The `/search` page will
    - Display a search box `<input name="mobile_number" />` that displays the placeholder text: "Enter a customer's phone number"
@@ -317,7 +317,7 @@ so that I can quickly access a customer's reservation when they call about their
 >     )
 >     .orderBy("reservation_date");
 > }
-> ```
+> ``` -->
 
 ### US-08 Change an existing reservation
 
