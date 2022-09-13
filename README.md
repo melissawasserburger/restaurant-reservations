@@ -113,7 +113,7 @@ so that I know how many customers will arrive at the restaurant on a given day.
      - Number of people in the party, which must be at least 1 person. `<input name="people" />`
    - display a `Submit` button that, when clicked, saves the new reservation, then displays the `/dashboard` page for the date of the new reservation
    - display a `Cancel` button that, when clicked, returns the user to the previous page -->
-   - display any error messages returned from the API (almost done, needs to display multiple)
+   <!-- - display any error messages returned from the API (almost done, needs to display multiple) -->
 <!-- 1. The `/dashboard` page will -->
    <!-- - list all reservations for one date only. (E.g. if the URL is `/dashboard?date=2035-12-30` then send a GET to `/reservations?date=2035-12-30` to list the reservations for that date). The date is defaulted to today, and the reservations are sorted by time. -->
    <!-- - display next, previous, and today buttons that allow the user to see reservations on other dates -->
@@ -175,8 +175,8 @@ so that users do not accidentally create a reservation for days when we are clos
    <!-- - The reservation date is a Tuesday as the restaurant is closed on Tuesdays. -->
    <!-- - The reservation date is in the past. Only future reservations are allowed. -->
 <!-- 1. The `/reservations` API will have the same validations as above and will return 400, along with an informative error message, when a validation error happens. -->
-
-> **Hint** There may be more than one validation error on the page at time.
+<!-- 
+> **Hint** There may be more than one validation error on the page at time. -->
 <!-- >
 > For example, a reservation in the past on a Tuesday violates both rules, so the page should display two errors within a single `className="alert alert-danger"`
 >
@@ -255,7 +255,7 @@ As a restaurant manager<br/>
 I want to free up an occupied table when the guests leave<br/>
 so that I can seat new guests at that table.<br/>
 
-#### Acceptance Criteria
+<!-- #### Acceptance Criteria -->
 
 <!-- 1. The `/dashboard` page will
    - Display a "Finish" button on each _occupied_ table.
@@ -273,7 +273,7 @@ As a restaurant manager<br/>
 I want a reservation to have a status of either booked, seated, or finished<br/>
 so that I can see which reservation parties are seated, and finished reservations are hidden from the dashboard.
 
-#### Acceptance Criteria
+<!-- #### Acceptance Criteria -->
 
 <!-- 1. The `/dashboard` page will -->
    <!-- - display the status of the reservation. The default status is "booked"
@@ -325,21 +325,21 @@ As a restaurant manager<br/>
 I want to be able to modify a reservation if a customer calls to change or cancel their reservation<br/>
 so that reservations are accurate and current.
 
-#### Acceptance Criteria
+<!-- #### Acceptance Criteria
 
-1. The `/dashboard` and the `/search` page will
-   - Display an "Edit" button next to each reservation
+1. The `/dashboard` and the `/search` page will -->
+   <!-- - Display an "Edit" button next to each reservation
      - Clicking the "Edit" button will navigate the user to the `/reservations/:reservation_id/edit` page
-   - the "Edit" button must be a link with an `href` attribute that equals `/reservations/${reservation_id}/edit`, so it can be found by the tests.
-   - Display a "Cancel" button next to each reservation
-   - The Cancel button must have a `data-reservation-id-cancel={reservation.reservation_id}` attribute, so it can be found by the tests.
-   - Clicking the "Cancel" button will display the following confirmation: "Do you want to cancel this reservation? This cannot be undone."
-     - Clicking "Ok" on the confirmation dialog, sets the reservation status to `cancelled`, and the results on the page are refreshed.
-       - set the status of the reservation to `cancelled` using a PUT to `/reservations/:reservation_id/status` with a body of `{data: { status: "cancelled" } }`.
-     - Clicking "Cancel" on the confirmation dialog makes no changes.
-1. The `/reservations/:reservation_id/edit` page will display the reservation form with the existing reservation data filled in
+   - the "Edit" button must be a link with an `href` attribute that equals `/reservations/${reservation_id}/edit`, so it can be found by the tests. -->
+   <!-- - Display a "Cancel" button next to each reservation
+   - The Cancel button must have a `data-reservation-id-cancel={reservation.reservation_id}` attribute, so it can be found by the tests. -->
+   <!-- - Clicking the "Cancel" button will display the following confirmation: "Do you want to cancel this reservation? This cannot be undone." -->
+   <!-- - Clicking "Ok" on the confirmation dialog, sets the reservation status to `cancelled`, and the results on the page are refreshed.
+   - set the status of the reservation to `cancelled` using a PUT to `/reservations/:reservation_id/status` with a body of `{data: { status: "cancelled" } }`.
+     - Clicking "Cancel" on the confirmation dialog makes no changes. -->
+<!-- 1. The `/reservations/:reservation_id/edit` page will display the reservation form with the existing reservation data filled in
    - Only reservations with a status of "booked" can be edited.
    - Clicking the "Submit" button will save the reservation, then displays the previous page.
    - Clicking "Cancel" makes no changes, then display the previous page.
 
-> **Hint** The same validation used for create applies to editing a reservation. The form and the API for updating a reservation must not allow the user to violate any of the rules specified when creating a reservation.
+> **Hint** The same validation used for create applies to editing a reservation. The form and the API for updating a reservation must not allow the user to violate any of the rules specified when creating a reservation. -->

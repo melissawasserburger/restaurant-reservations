@@ -1,13 +1,14 @@
 import React from "react";
 
 import { Redirect, Route, Switch } from "react-router-dom";
-import Dashboard from "../dashboard/Dashboard";
-import ReservationForm from "./ReservationForm";
-import TableForm from "../tables/TableForm";
-import SeatTableForm from "../tables/SeatTableForm";
-import Search from "./Search";
-import NotFound from "./NotFound";
-import { today } from "../utils/date-time";
+import Dashboard from "./dashboard/Dashboard";
+import ReservationForm from "./reservations/ReservationForm";
+import TableForm from "./tables/TableForm";
+import SeatTableForm from "./tables/SeatTableForm";
+import EditReservation from "./reservations/EditReservation";
+import Search from "./dashboard/Search";
+import NotFound from "./common/NotFound";
+import { today } from "./utils/date-time";
 
 function Routes() {
   return (
@@ -20,6 +21,9 @@ function Routes() {
       </Route>
       <Route path="/reservations/:reservation_id/seat">
         <SeatTableForm />
+      </Route>
+      <Route path="/reservations/:reservation_id/edit">
+        <EditReservation />
       </Route>
       <Route exact path="/tables">
         <Redirect to={"/dashboard"} />

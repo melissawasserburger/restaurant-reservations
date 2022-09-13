@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
-import ErrorAlert from "./ErrorAlert";
+import ErrorAlert from "../common/ErrorAlert";
 
 const { REACT_APP_API_BASE_URL } = process.env;
 
@@ -81,6 +81,7 @@ function ReservationForm() {
           value={formState.first_name}
           onChange={changeHandler}
         ></input>
+        <br />
         <label htmlFor="last_name">Last Name</label>
         <input
           required
@@ -90,6 +91,7 @@ function ReservationForm() {
           value={formState.last_name}
           onChange={changeHandler}
         ></input>
+        <br />
         <label htmlFor="mobile_number">Reservation Contact Number</label>
         <input
           required
@@ -100,6 +102,7 @@ function ReservationForm() {
           value={formState.mobile_number}
           onChange={changeHandler}
         ></input>
+        <br />
         <label htmlFor="reservation_date">Reservation Date</label>
         <input
           required
@@ -111,6 +114,7 @@ function ReservationForm() {
           value={formState.reservation_date}
           onChange={changeHandler}
         ></input>
+        <br />
         <label htmlFor="reservation_time">Reservation Start Time</label>
         <input
           required
@@ -122,6 +126,7 @@ function ReservationForm() {
           value={formState.reservation_time}
           onChange={changeHandler}
         ></input>
+        <br />
         <label htmlFor="people">Number of Guests</label>
         <input
           required

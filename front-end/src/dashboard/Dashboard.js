@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router";
 import { listReservations, listTables } from "../utils/api";
-import ErrorAlert from "../layout/ErrorAlert";
-import ReservationsList from "./ReservationsList";
-import TablesList from "./TablesList";
+import ErrorAlert from "../common/ErrorAlert";
+import ReservationsList from "../reservations/ReservationsList";
+import TablesList from "../tables/TablesList";
 import { formatAsTime, previous, next, today } from "../utils/date-time";
 
 import "./Dashboard.css";
@@ -12,6 +12,7 @@ function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
   const [tables, setTables] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
+  const [cancelled, setCancelled] = useState(false);
 
   const history = useHistory();
 
@@ -53,7 +54,7 @@ function Dashboard({ date }) {
     return text;
   }
 
-  useEffect(loadDashboard, [date]);
+  useEffect(loadDashboard, [date, cancelled]);
 
   function loadDashboard() {
     const abortController = new AbortController();
@@ -72,6 +73,8 @@ function Dashboard({ date }) {
 
   const reservationsList = reservations.map((reservation, index) => (
     <ReservationsList
+      setCancelled={setCancelled}
+      cancelled={cancelled}
       key={index}
       reservation={reservation}
       formatTime={formatAsTime}

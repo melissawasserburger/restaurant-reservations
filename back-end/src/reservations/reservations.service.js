@@ -6,7 +6,12 @@ async function list(date) {
     .where({
       reservation_date: date,
     })
-    .whereNot({ status: "finished" })
+    .whereNot({
+      status: "finished",
+    })
+    .whereNot({
+      status: "cancelled",
+    })
     .orderBy("reservation_time");
 }
 
@@ -33,11 +38,51 @@ async function read(reservation_Id) {
     .first();
 }
 
-async function update(reservation_id) {
+async function update(newReservation) {
+  const {
+    first_name,
+    last_name,
+    mobile_number,
+    reservation_date,
+    reservation_time,
+    people,
+  } = newReservation;
+
+  return knex("reservations")
+    .select("*")
+    .where({ reservation_id: newReservation.reservation_id })
+    .update(
+      {
+        first_name: first_name,
+        last_name: last_name,
+        mobile_number: mobile_number,
+        reservation_date: reservation_date,
+        reservation_time: reservation_time,
+        people: people,
+      },
+      "*"
+    );
+}
+
+async function updateToSeated(reservation_id) {
   return knex("reservations")
     .select("*")
     .where({ reservation_id: reservation_id })
     .update({ status: "seated" }, "*");
+}
+
+async function updateToCancelled(reservation_id) {
+  return knex("reservations")
+    .select("*")
+    .where({ reservation_id: reservation_id })
+    .update({ status: "cancelled" }, "*");
+}
+
+async function updateToFinished(reservation_id) {
+  return knex("reservations")
+    .select("*")
+    .where({ reservation_id: reservation_id })
+    .update({ status: "finished" }, "*");
 }
 
 module.exports = {
@@ -46,4 +91,7 @@ module.exports = {
   create,
   read,
   update,
+  updateToSeated,
+  updateToCancelled,
+  updateToFinished,
 };

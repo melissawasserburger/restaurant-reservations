@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { listTables } from "../utils/api";
-import ErrorAlert from "../layout/ErrorAlert";
+import ErrorAlert from "../common/ErrorAlert";
 
 const { REACT_APP_API_BASE_URL } = process.env;
 
@@ -42,8 +42,8 @@ function SeatTableForm() {
       if (resData.error) {
         setError(resData.error);
       }
-    
-      if (response.status !== 400) {
+    console.log(response.status)
+      if (response.status === 200) {
         history.push(`/dashboard`);
       }
   };

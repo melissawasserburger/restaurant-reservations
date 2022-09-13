@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ErrorAlert from "./ErrorAlert";
-import ReservationList from "../dashboard/ReservationsList";
+import ErrorAlert from "../common/ErrorAlert";
+import ReservationList from "../reservations/ReservationsList";
 import { formatAsTime } from "../utils/date-time";
 
 const { REACT_APP_API_BASE_URL } = process.env;
@@ -10,6 +10,7 @@ function Search() {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
   const [altMessage, setAltMessage] = useState("");
+  const [cancelled, setCancelled] = useState(false);
 
   function changeHandler({ target }) {
     setFormState(target.value);
@@ -27,13 +28,11 @@ function Search() {
       }
     );
     const resData = await response.json();
-    console.log(resData);
-    console.log(resData.data.length);
     if (response.status !== 400) {
       setReservations(resData.data);
     }
     if (resData.data.length === 0) {
-        setAltMessage("No reservations found.");
+      setAltMessage("No reservations found.");
     }
     if (resData.error) {
       setReservationsError(resData.error);
@@ -46,12 +45,16 @@ function Search() {
         key={index}
         reservation={reservation}
         formatTime={formatAsTime}
+        cancelled={cancelled}
+        setCancelled={setCancelled}
       />
     );
   });
 
-  console.log(altMessage)
-  console.log(reservationsList.length)
+  if (cancelled) {
+    window.location.reload();
+  };
+
   return (
     <div>
       <div>
@@ -71,7 +74,13 @@ function Search() {
         ></input>
         <button type="submit">Find</button>
       </form>
-      <div>{reservationsList.length === 0 ? <h3>{altMessage}</h3> : reservationsList}</div>
+      <div>
+        {reservationsList.length === 0 ? (
+          <h3>{altMessage}</h3>
+        ) : (
+          reservationsList
+        )}
+      </div>
     </div>
   );
 }
