@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "./common/Menu";
 import Routes from "./Routes";
+import Footer from "./common/Footer";
 
 /**
  * Defines the main layout of the application.
@@ -18,6 +19,9 @@ function Layout() {
         </div>
         <div>
           <Routes />
+        </div>
+        <div>
+          <Footer />
         </div>
       </div>
     </div>

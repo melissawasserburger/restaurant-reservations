@@ -1,25 +1,142 @@
 #reservation-card {
-    width: 40%;
-    height: 22rem;
-    padding: 20px;
-    margin: 2rem 1rem;
-    border: black solid 1px;
-    border-radius: 2rem;
-    background-color: #EBF3F3;
+  background: #adadad url("../photos/paper.jpg") left no-repeat;
+  background-size: cover;
+  border-style: outset;
+  height: max-content;
+  padding: 20px;
+  margin: 1rem;
+  border-radius: 1rem;
+  background-color: #ebf3f3;
 }
 
 #card-title {
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-    padding: 10px 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px 20px;
+  position: relative;
+  bottom: 8px;
 }
 
 #card-label {
-    color: #7C7C9C;
-    margin-left: 1rem;
+  font-size: 18px;
+  font-weight: 600;
+  margin-left: 1rem;
 }
 
 #card-text {
-    margin-left: 1rem;
+  margin-left: 1rem;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#editBtn {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: 0.75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+#seatBtn {
+  align-self: center;
+  background-color: rgb(135, 212, 91);
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 23px;
+  outline: none;
+  padding: 0.75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+#cancelBtn {
+  align-self: center;
+  background-color: rgb(255, 147, 147);
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 23px;
+  outline: none;
+  padding: .4rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+#seatBtn a {
+  color: white;
+}
+
+#editBtn:hover,
+#seatBtn:hover,
+#cancelBtn:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+#editBtn:focus,
+#seatBtn:focus,
+#cancelBtn:focus {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
 }

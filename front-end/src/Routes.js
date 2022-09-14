@@ -12,6 +12,7 @@ import { today } from "./utils/date-time";
 
 function Routes() {
   return (
+    <div style={{minHeight: "600px"}}>
     <Switch>
       <Route exact path="/">
         <Redirect to={"/dashboard"} />
@@ -44,6 +45,7 @@ function Routes() {
         <NotFound />
       </Route>
     </Switch>
+    </div>
   );
 }
 

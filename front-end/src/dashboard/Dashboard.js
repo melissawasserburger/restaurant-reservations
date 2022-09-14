@@ -150,7 +150,7 @@ function Dashboard({ date }) {
       </div>
 
       <div className="row">
-        <div className="col col-7 d-flex flex-wrap" id="reservations">
+        <div className="col col-6 d-flex flex-column" id="reservations">
           {reservationsList.length === 0 ? (
             <div id="no-reservations">
               <h3>There are no reservations for this date.</h3>
@@ -161,9 +161,13 @@ function Dashboard({ date }) {
         </div>
 
         <br />
-
-        <div className="col d-flex flex-wrap">
-          {tablesList.length === 0 ? <h3>No Tables Listed</h3> : tablesList}
+        <div className="col col-6">
+          <h3 className="d-flex justify-content-center mt-2" style={{ fontFamily: "Racing Sans One", fontSize: "2rem" }}>
+            Current Tables
+          </h3>
+          <div className="col d-flex flex-wrap justify-content-around">
+            {tablesList.length === 0 ? <h3>No Tables Listed</h3> : tablesList}
+          </div>
         </div>
       </div>
     </main>

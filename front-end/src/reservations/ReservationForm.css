@@ -1,14 +1,15 @@
-#reservation-form {
-    margin: 1rem 1rem 1rem 0;
-    padding: 2rem;
-    height: 100%;
-    width: 60%;
+#form-title {
+    font-family: "Racing Sans One";
+    font-size: 2rem;
+    margin: 2rem;
 }
 
-#input-label {
-    margin: 2rem 2rem 0 2rem;
+form label {
+    padding-left: 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 
-button {
-    margin: 1rem;
+form input {
+    margin-right: 3rem;
 }

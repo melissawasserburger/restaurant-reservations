@@ -1,0 +1,16 @@
+#form-group {
+    margin-top: 2rem;
+    background-color: #c8f2ff;
+    padding: 0 3rem 3rem 3rem;
+}
+
+#form-label {
+    font-size: 2rem;
+    margin: 1rem 0;
+    width: auto;
+}
+
+#select {
+    margin-bottom: 2rem;
+    width: 75%;
+}

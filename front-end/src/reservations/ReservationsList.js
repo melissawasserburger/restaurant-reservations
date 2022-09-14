@@ -45,19 +45,52 @@ function ReservationList({ reservation, formatTime, cancelled, setCancelled }) {
   };
 
   return (
-    <div id="reservation-card">
-      <div id="card-title">
-        Reservation for {formattedTime}{" "}
+    <div className="row d-flex flex-wrap" id="reservation-card">
+      <div className="col col-12 d-flex justify-content-center" id="card-title">
+        Reservation for {first_name} {last_name} at {formattedTime}
         {new Date(`${reservation_date} ${reservation_time}`).getHours() < 12
           ? "AM"
           : "PM"}
       </div>
-      <div>
+
+      <div className="col col-12 d-flex justify-content-center">
+        <div className="col col-3 d-flex flex-wrap justify-content-around">
+          <p id="card-label">Status:</p>
+          <p id="card-text" data-reservation-id-status={reservation_id}>
+            {status}
+          </p>
+        </div>
+        <div className="col col-5 d-flex flex-wrap justify-content-around">
+          <p id="card-label">Contact Number:</p>
+          <p id="card-text">{mobile_number}</p>
+        </div>
+        <div className="col col-4 d-flex flex-wrap justify-content-around">
+          <p id="card-label">Number of Guests:</p>
+          <p id="card-text">{people}</p>
+        </div>
+      </div>
+
+      <div className="col col-12 d-flex">
+        <button
+          data-reservation-id-cancel={reservation_id}
+          type="button"
+          name="cancelBtn"
+          id="cancelBtn"
+          className="d-flex ml-5"
+          onClick={cancelHandler}
+        >
+          Cancel
+        </button>
         {status === "booked" ? (
-          <button type="button" className="btn btn-secondary" name="editBtn">
+          <button
+            type="button"
+            className="ml-auto mb-2"
+            name="editBtn"
+            id="editBtn"
+          >
             <a
               href={`/reservations/${reservation_id}/edit`}
-              className="text-light"
+              className="text-dark"
             >
               Edit
             </a>
@@ -65,42 +98,14 @@ function ReservationList({ reservation, formatTime, cancelled, setCancelled }) {
         ) : (
           <></>
         )}
-        <h6 id="card-label">Name:</h6>
-        <p id="card-text">
-          {first_name} {last_name}
-        </p>
-        <h6 id="card-label">Status:</h6>
-        <p id="card-text" data-reservation-id-status={reservation_id}>
-          {status}
-        </p>
-        <h6 id="card-label">Contact Number:</h6>
-        <p id="card-text">{mobile_number}</p>
-        <h6 id="card-label">Number of Guests:</h6>
-        <p id="card-text">{people}</p>
-      </div>
-      <div className="d-flex justify-content-end">
         {status === "booked" ? (
-          <button type="button" className="btn btn-secondary px-4 mr-4">
-            <a
-              className="text-light"
-              href={`/reservations/${reservation_id}/seat`}
-            >
-              Seat
-            </a>
+          <button type="button" id="seatBtn" className="d-flex mb-2 ml-3 mr-5">
+            <a href={`/reservations/${reservation_id}/seat`}>Seat</a>
           </button>
         ) : (
           <></>
         )}
       </div>
-      <button
-        data-reservation-id-cancel={reservation_id}
-        type="button"
-        name="cancelBtn"
-        className="btn btn-danger"
-        onClick={cancelHandler}
-      >
-        Cancel
-      </button>
     </div>
   );
 }

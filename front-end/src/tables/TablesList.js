@@ -35,17 +35,17 @@ function TablesList({ table, setError }) {
   }
 
   return (
-    <div id="whole-card" className="mx-3">
+    <div id="whole-card">
       <div className="row d-flex justify-content-center">
         <h4 id="table-name">Table: {table_name}</h4>
       </div>
       <ul>
-        <div className="row d-flex justify-content-around">
+        <div className="row d-flex justify-content-center">
           <li id="table-info">
             <span className="col">Capacity: </span><span className="col" id="table-info-value">{capacity}</span>
           </li>
         </div>
-        <div className="row d-flex justify-content-around">
+        <div className="row d-flex justify-content-center">
           <li id="table-info" data-table-id-status={table.table_id}>
           <span className="col">Status: </span>
             <span id="table-info-value">

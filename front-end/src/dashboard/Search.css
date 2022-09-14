@@ -1,41 +1,5 @@
-#whole-card {
-  background: #ffffff url("../photos/to-down-table.jpg") top;
-  background-size: cover;
-  margin: 1rem 1rem;
-  width: 230px;
-  height: 230px;
-  padding: 1rem;
-  border-radius: 50%;
-}
-
-#table-name {
-  width: fit-content;
-  margin: 1.5rem 0 0 0;
-  font-size: 1.25rem;
-  font-weight: 500;
-  border-bottom: #111827 solid 1px;
-}
-
-ul {
-    padding:0;
-}
-
-#table-info {
-  margin-top: 0.75rem;
-  text-align: center;
-  list-style: none;
-  font-weight: 500;
-}
-
-#table-info-value {
-    font-size: 1.1rem;
-    margin-left: 6px;
-}
-
-#finish-btn {
-  margin-top: 10px;
-  width: 50%;
-  background-color: #e9e2be8a;
+#findBtn {
+  background-color: rgb(231, 229, 229);
   border: 0;
   border-radius: 0.5rem;
   box-sizing: border-box;
@@ -57,15 +21,36 @@ ul {
   touch-action: manipulation;
 }
 
-#finish-btn:hover {
+#findBtn:hover {
   background-color: rgb(249, 250, 251);
 }
 
-#finish-btn:focus {
+#findBtn:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
 }
 
-#finish-btn:focus-visible {
+#findBtn:focus-visible {
   box-shadow: none;
+}
+
+/* This selector will grab elements in other forms like ReservationForm.js */
+#first_name,
+#last_name,
+#mobile_number,
+#reservation_date,
+#reservation_time,
+#people,
+#table_name,
+#capacity {
+  height: 44px;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  color: #111827;
+  font-family: "Inter var", ui-sans-serif, system-ui, -apple-system, system-ui,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem;
 }

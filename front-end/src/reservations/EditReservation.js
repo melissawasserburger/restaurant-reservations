@@ -58,13 +58,16 @@ function EditReservation() {
   async function submitHandler(e) {
     e.preventDefault();
     formState.people = Number(formState.people);
-    const response = await fetch(`${REACT_APP_API_BASE_URL}/reservations/${reservation_id}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({ data: formState }),
-    });
+    const response = await fetch(
+      `${REACT_APP_API_BASE_URL}/reservations/${reservation_id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ data: formState }),
+      }
+    );
     const resData = await response.json();
 
     if (resData.error) {
@@ -78,93 +81,126 @@ function EditReservation() {
 
   return (
     <div>
-        <div>
-            {error ? <ErrorAlert errorMessage={error} /> : <></>}
-        </div>
+      <div>{error ? <ErrorAlert errorMessage={error} /> : <></>}</div>
       {reservation.first_name ? (
-        <div className="form-group">
-          <form onSubmit={submitHandler}>
-            <label htmlFor="first_name">First Name</label>
-            <input
-              required
-              type="text"
-              id="first_name"
-              name="first_name"
-              value={formState.first_name}
-              onChange={changeHandler}
-            ></input>
-            <br />
-            <label htmlFor="last_name">Last Name</label>
-            <input
-              required
-              type="text"
-              id="last_name"
-              name="last_name"
-              value={formState.last_name}
-              onChange={changeHandler}
-            ></input>
-            <br />
-            <label htmlFor="mobile_number">Reservation Contact Number</label>
-            <input
-              required
-              type="text"
-              id="mobile_number"
-              name="mobile_number"
-              placeholder="xxx-xxx-xxxx"
-              value={formState.mobile_number}
-              onChange={changeHandler}
-            ></input>
-            <br />
-            <label htmlFor="reservation_date">Reservation Date</label>
-            <input
-              required
-              type="date"
-              id="reservation_date"
-              name="reservation_date"
-              placeholder="YYYY-MM-DD"
-              pattern="\d{4}-\d{2}-\d{2}"
-              value={formState.reservation_date}
-              onChange={changeHandler}
-            ></input>
-            <br />
-            <label htmlFor="reservation_time">Reservation Start Time</label>
-            <input
-              required
-              type="time"
-              id="reservation_time"
-              name="reservation_time"
-              placeholder="HH:MM"
-              pattern="[0-9]{2}:[0-9]{2}"
-              value={formState.reservation_time}
-              onChange={changeHandler}
-            ></input>
-            <br />
-            <label htmlFor="people">Number of Guests</label>
-            <input
-              required
-              type="number"
-              id="people"
-              name="people"
-              value={formState.people}
-              onChange={changeHandler}
-            ></input>
-            <br />
-            <button
-              type="button"
-              name="cancel-btn"
-              className="btn btn-primary"
-              onClick={() => history.goBack()}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              name="submit-btn"
-              className="btn btn-secondary"
-            >
-              Submit
-            </button>
-          </form>
+        <div>
+          <h4 id="form-title">Edit a Reservation</h4>
+          <div className="col d-flex my-4">
+            <form className="col col-6" onSubmit={submitHandler}>
+              <div className="d-flex justify-content-between">
+              <label style={{ fontSize: "1.25rem" }} htmlFor="first_name">
+                First Name
+              </label>
+              <input
+                required
+                type="text"
+                id="first_name"
+                name="first_name"
+                value={formState.first_name}
+                onChange={changeHandler}
+                className="col col-5"
+              ></input>
+              </div>
+              <br />
+              <div className="d-flex justify-content-between">
+              <label style={{ fontSize: "1.25rem" }} htmlFor="last_name">
+                Last Name
+              </label>
+              <input
+                required
+                type="text"
+                id="last_name"
+                name="last_name"
+                value={formState.last_name}
+                onChange={changeHandler}
+                className="col col-5"
+              ></input>
+              </div>
+              <br />
+              <div className="d-flex justify-content-between">
+              <label style={{ fontSize: "1.25rem" }} htmlFor="mobile_number">
+                Contact Number
+              </label>
+              <input
+                required
+                type="text"
+                id="mobile_number"
+                name="mobile_number"
+                placeholder="xxx-xxx-xxxx"
+                value={formState.mobile_number}
+                onChange={changeHandler}
+                className="col col-5"
+              ></input>
+              </div>
+              <br />
+              <div className="d-flex justify-content-between">
+              <label style={{ fontSize: "1.25rem" }} htmlFor="reservation_date">
+                Reservation Date
+              </label>
+              <input
+                required
+                type="date"
+                id="reservation_date"
+                name="reservation_date"
+                placeholder="YYYY-MM-DD"
+                pattern="\d{4}-\d{2}-\d{2}"
+                value={formState.reservation_date}
+                onChange={changeHandler}
+                className="col col-5"
+              ></input>
+              </div>
+              <br />
+              <div className="d-flex justify-content-between">
+              <label style={{ fontSize: "1.25rem" }} htmlFor="reservation_time">
+                Reservation Start Time
+              </label>
+              <input
+                required
+                type="time"
+                id="reservation_time"
+                name="reservation_time"
+                placeholder="HH:MM"
+                pattern="[0-9]{2}:[0-9]{2}"
+                value={formState.reservation_time}
+                onChange={changeHandler}
+                className="col col-5"
+              ></input>
+              </div>
+              <br />
+              <div className="d-flex justify-content-between">
+              <label style={{ fontSize: "1.25rem" }} htmlFor="people">
+                Number of Guests
+              </label>
+              <input
+                required
+                type="number"
+                id="people"
+                name="people"
+                value={formState.people}
+                onChange={changeHandler}
+                className="col col-5"
+              ></input>
+              </div>
+              <br />
+              <div className="col col-12">
+                <button
+                  type="button"
+                  name="cancel-btn"
+                  className="btn btn-secondary"
+                  onClick={() => history.goBack()}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  name="submit-btn"
+                  className="btn btn-primary ml-3"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       ) : (
         <h2>Loading reservation...</h2>
