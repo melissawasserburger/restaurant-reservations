@@ -226,10 +226,6 @@ async function update(req, res, next) {
   } else {
     data = [{...req.body.data, reservation_id: res.locals.reservation.reservation_id}]
   }
-  // const newReservation = {
-  //   ...req.body.data,
-  //   reservation_id: res.locals.reservation.reservation_id,
-  // };
 
   res.status(200).json({ data: data[0] });
 }
